@@ -1,0 +1,21 @@
+﻿@model Person;
+
+if(Model != null)
+{
+    <div>
+        <div class="col">
+            <h3>@Model.Name</h3>
+
+        </div>
+        <div class="col">
+            <h3>@Model.City</h3>
+            </div>
+            <div class="col">
+                <h3>@Model.NumberOfBooks</h3>
+            </div>
+            <div class="col">
+                <a asp-action="Delete" asp-rout-id=@Model.Id type="submit" class="btn btn-danger">Delete</a>
+            </div>
+    </div>
+}
+
