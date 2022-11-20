@@ -1,4 +1,39 @@
 ﻿
+@model PeopleViewModel
+
+	<div class="container">
+		<div class="table">
+		   
+			   
+			   @foreach (var person in Model.tempList)
+{
+					   <div class="row">
+					   <div class="col">
+					   @person.Name
+				   </div>
+				   <div class="col">
+					   @person.City
+				   </div>
+				   <div class="col">
+					   @person.NumberOfBooks
+				   </div>
+				   <div class="col">
+					   @person.Id
+				   </div>
+				   <div>
+					   <a asp-action="Delete" asp-controller="Home" asp-route-id=@person.Id class="btn btn-danger">Delete</a>
+				   </div>
+				 
+</div>
+}
+			   
+		
+		   
+		   </div>
+
+		</div>
+
+
 @*@model ViewModel;
 
 @foreach (var person in Model.tempList)
