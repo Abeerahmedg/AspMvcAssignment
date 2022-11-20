@@ -1,4 +1,57 @@
-﻿
-@{
+@model PeopleViewModel
 
-}
+<h3>Ajax page</h3>
+<br />
+<div class="container">
+    <div>
+        <button onclick="CreatePeople()" class="btn-outline-dark">Show All</button>
+
+    </div>
+    <br />
+    <label>Write the Id to get details: </label>
+    <input type="text" id="id" name="id" />
+    <button onclick="GetDetails()" id="details" type="submit">Details</button>
+    <button onclick="Delete()" id="delete" type="submit">Delete</button>
+    <br />
+
+
+    <div id="div-partial"></div>
+    <br />
+</div>
+
+<script>function GetDetails() {
+        var inputId = $('#id').val();
+         //var inputId = document.getElementById("id").val();
+        $.ajax({
+            type: "POST",
+            url: "../Ajax/GetDetails?id=" + inputId,
+            data: {
+                id : inputId,
+            },
+            success: function (response) {
+                $("#div-partial").html(response);
+            }
+        });
+    };
+    function Delete(){
+        var inputId = $('#id').val();
+        $.ajax({
+            type: "POST",
+            url: "../Ajax/Delete?id=" + inputId,
+            data: {
+                id : inputId,
+            },
+            success: function (response) {
+                $("#div-partial").html(response);
+            }
+        });
+    };
+    function CreatePeople(){
+        $.ajax({
+            type: "GET",
+            url:"../Ajax/CreatePeople",
+            success: function (data){
+                $("#div-partial").html(data);
+            }
+        });
+    };</script>
