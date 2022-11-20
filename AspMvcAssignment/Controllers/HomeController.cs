@@ -1,4 +1,5 @@
-﻿using AspMvcAssignment.Models;
+using System.Reflection;
+using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,7 +11,7 @@ namespace AspMvcAssignment.Controllers
         {
             if (PeopleViewModel.PeopleList.Count == 0)
             { 
-                CreatePersonViewModel.FillPeople();
+                PeopleViewModel.FillPeople();
 
             }
                 PeopleViewModel pvm = new PeopleViewModel();
@@ -22,25 +23,42 @@ namespace AspMvcAssignment.Controllers
         public IActionResult Delete(string id)
         {
             Person person = PeopleViewModel.PeopleList.FirstOrDefault(s => s.Id == id);
-            if (person != null)
-            {
-                PeopleViewModel.PeopleList.Remove(person);
-
-            }
+          
+            PeopleViewModel.PeopleList.Remove(person);
 
             return RedirectToAction("Index");
 
         }
 
+        [HttpPost]
      public IActionResult CreatePerson(CreatePersonViewModel createPerson)
         {
-            PeopleViewModel pvm = new PeopleViewModel();
+            
             if (ModelState.IsValid)
             {
-                pvm.CreatePerson(createPerson.Id,createPerson.Name, createPerson.NumberOfBooks, createPerson.City);
+                Person person = new Person(Guid.NewGuid().ToString(), createPerson.Name, createPerson.NumberOfBooks, createPerson.City);
+                PeopleViewModel.PeopleList.Add(person);
             }
-            pvm.tempList= PeopleViewModel.PeopleList;
-            return View("Index", pvm);
+            
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Index(string search)
+        {
+            PeopleViewModel pvm = new();
+            if (search == null || search.Trim() == "")
+            {
+                return RedirectToAction("Index");
+            }
+            foreach (Person person in PeopleViewModel.PeopleList)
+            {
+                if (person.Name.Contains(search) || person.City.Contains(search))
+                {
+                    pvm.tempList.Add(person);
+                }
+            }
+            return View(pvm);
         }
 
     }
