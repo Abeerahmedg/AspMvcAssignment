@@ -1,88 +1,126 @@
-﻿@model PeopleViewModel
+@model PeopleViewModel
 
 @{
     ViewData["Title"] = "Writer List";
 }
 
-<br />
-<input class="form-control" id="myInput" type="text" placeholder="Search..">
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-            <h6>
-                @Html.DisplayNameFor(Model=>Model.Id)
-            </h6>
-        </div>
-        <div class="col-4">
-            <h6>
-                @Html.DisplayNameFor(Model=>Model.Name)
-            </h6>
-        </div>
-        <div class="col-4">
-            <h6>
-                @Html.DisplayNameFor(Model=>Model.NumberOfBooks)
-            </h6>
-        </div>
-        <div class="col-4">
-            <h5>
-                
-                @Html.DisplayNameFor(Model=>Model.City)
-            </h5>
-        </div>
-        <div class="col-4"> 
 
-        </div>
+
+<form method="post" action="@Url.ActionLink("Index", "Home")">
+    <div class="search-form">
+        <input type="text" name="search" placeholder="Search">
+        <input type="submit" value="Search">
     </div>
-    @if (Model.tempList.Count == null)
-    {
-        <h3>The list is Empty</h3>
-    }
-    else
-    {
-        foreach (var person in Model.tempList)
-        {
-            <partial name="_PeopleDetailsPArtial" model="person"/>
-            
-        }
-    }
+</form>
 
-    <div class="container">
-        <form asp-controller="Home" asp-action="CreatePerson" method="post">
-            <h3>Add new writer: </h3>
-            <br />
-            <div class="row">
-                <label>@Html.DisplayNameFor(Model=>Model.Id)</label>
-                <input class="input" asp-for="Id" type="text" required />
-            </div>
-            <div class="row">
-                <label>@Html.DisplayNameFor(Model=>Model.Name)</label>
-                <input class="input" asp-for="Name" type="text" required />
-            </div>
-            <div class="row">
-                <label>@Html.DisplayNameFor(Model=>Model.NumberOfBooks)</label>
-                <input class="input" asp-for="NumberOfBooks" type="text" required />
-            </div>
-            <div class="row">
-                <label>@Html.DisplayNameFor(Model=>Model.City)</label>
-                <input class="input" asp-for="City" type="text" required />
-            </div>
-            <div>
-                <input type="submit" value="Add writer" class="col--md-4 btn btn-success" />
 
-            </div>
-
-        </form>
-    </div>
+<div class="text-center">
+    <form method="post" action="@Url.ActionLink("CreatePerson", "Home")">
+        <input type="text" name="Name" placeholder="Name">
+        <input type="text" name="NumberOfBooks" placeholder="Number of books">
+        <input type="text" name="City" placeholder="City">
+        <input type="submit" value="Add">
+    </form>
 </div>
-    <script>
-        $(document).ready(function () {
-            $("#myInput").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#myTable tr").filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+<br />
+<div class="container">
+<div class="row">
+    <p class="col">Name</p>
+    <p class="col">City</p>
+    <p class="col">Number of books</p>
+    <p class="col">ID</p>
+    <p> </p>
+
+</div>
+</div>
+
+@foreach (var person in Model.tempList)
+{
+<div class="col">
+ <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
+</div>
+   
+}
+
+@**<br />
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <h6>
+                    @Html.DisplayNameFor(Model=>Model.Id)
+                </h6>
+            </div>
+            <div class="col-4">
+                <h6>
+                    @Html.DisplayNameFor(Model=>Model.Name)
+                </h6>
+            </div>
+            <div class="col-4">
+                <h6>
+                    @Html.DisplayNameFor(Model=>Model.NumberOfBooks)
+                </h6>
+            </div>
+            <div class="col-4">
+                <h5>
+
+                    @Html.DisplayNameFor(Model=>Model.City)
+                </h5>
+            </div>
+            <div class="col-4">
+
+            </div>
+        </div>
+        @if (Model.tempList.Count == null)
+        {
+            <h3>The list is Empty</h3>
+        }
+        else
+        {
+            foreach (var person in Model.tempList)
+            {
+                <partial name="_PeopleDetailsPArtial" model="person"/>
+
+            }
+        }
+
+        <div class="container">
+            <form asp-controller="Home" asp-action="CreatePerson" method="post">
+                <h3>Add new writer: </h3>
+                <br />
+                <div class="row">
+                    <label>@Html.DisplayNameFor(Model=>Model.Id)</label>
+                    <input class="input" asp-for="Id" type="text" required />
+                </div>
+                <div class="row">
+                    <label>@Html.DisplayNameFor(Model=>Model.Name)</label>
+                    <input class="input" asp-for="Name" type="text" required />
+                </div>
+                <div class="row">
+                    <label>@Html.DisplayNameFor(Model=>Model.NumberOfBooks)</label>
+                    <input class="input" asp-for="NumberOfBooks" type="text" required />
+                </div>
+                <div class="row">
+                    <label>@Html.DisplayNameFor(Model=>Model.City)</label>
+                    <input class="input" asp-for="City" type="text" required />
+                </div>
+                <div>
+                    <input type="submit" value="Add writer" class="col--md-4 btn btn-success" />
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+        <script>
+            $(document).ready(function () {
+                $("#myInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("#myTable tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                    });
                 });
             });
-        });
-    </script>
+        </script>*@
 
 
