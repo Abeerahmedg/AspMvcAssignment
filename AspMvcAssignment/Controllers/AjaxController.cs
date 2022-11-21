@@ -15,23 +15,23 @@ namespace AspMvcAssignment.Controllers
         [HttpPost]
         public IActionResult GetDetails(string id)
         {
-            Person person = PeopleViewModel.PeopleList.FirstOrDefault(i => i.Id == id);
-            if (person == null)
-            {
-                return Json("The writer name was not found!");
-            }
-            return PartialView("_PeoplePartial", person);
-          /*  PeopleViewModel pvm = new();
+            //Person person = PeopleViewModel.PeopleList.FirstOrDefault(i => i.Id == id);
+            //if (person == null)
+            //{
+            //    return Json("The writer name was not found!");
+            //}
+            //return PartialView("_PeoplePartial", person);
+           PeopleViewModel pvm = new();
             foreach (Person person in PeopleViewModel.PeopleList)
             {
                 if (person.Id == id.Trim())
                 {
                     pvm.tempList.Add(person);
-                    return PartialView("_PeopleDetailsPartial", pvm);
+                    return PartialView("_PersonPartial", pvm);
                 }
             }
             pvm.tempList = PeopleViewModel.PeopleList;
-            return PartialView("_PeopleDetailsPartial", pvm);*/
+            return Json("The writer name was not found!");
         }
 
         [HttpPost]
