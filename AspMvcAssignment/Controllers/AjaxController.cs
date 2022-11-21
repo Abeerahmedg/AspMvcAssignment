@@ -20,7 +20,7 @@ namespace AspMvcAssignment.Controllers
             {
                 return Json("The writer name was not found!");
             }
-            return PartialView("_peopleDeatilsPartial", person);
+            return PartialView("_PeoplePartial", person);
           /*  PeopleViewModel pvm = new();
             foreach (Person person in PeopleViewModel.PeopleList)
             {
