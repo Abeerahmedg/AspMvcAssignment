@@ -1,0 +1,15 @@
+﻿@model Person
+@{
+    ViewData["Title"] = "Create";
+}
+<h3>Add new writer: </h3>
+<form asp-action="Create" method="post">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" required />
+    <label asp-for="NumberOfBooks"></label>
+    <input asp-for="NumberOfBooks" required />
+    <label asp-for="City"></label>
+    <input asp-for="City" required />
+
+    <input type="submit" value="Create" />
+</form>

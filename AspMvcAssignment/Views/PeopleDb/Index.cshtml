@@ -1,9 +1,17 @@
 ﻿@model IEnumerable<Person>
 @{
-    ViewData["Title"] = "Writers";
+    ViewData["Title"] = "Index";
 }
 
-<div><a asp-action="Crete" class="btn btn-primary">Add new writer</a></div>
+<div><a asp-action="Create" class="btn btn-primary">Add new writer</a></div>
+<br />
+
+@*<form method="post" action="@Url.ActionLink("Index" , "PeopleDb")">
+    <div class="search-form">
+        <input type="text" name="search" placeholder="Search" />
+        <input type="submit" value="search" />
+    </div>
+</form>*@
 
 <h3>List of writers</h3>
 
