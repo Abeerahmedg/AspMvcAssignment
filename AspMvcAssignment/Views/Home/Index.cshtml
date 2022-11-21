@@ -22,7 +22,7 @@
     <p class="col">City</p>
     <p class="col">Number of books</p>
     <p class="col">ID</p>
-   
+
 
 </div>
 </div>
@@ -31,11 +31,15 @@
 {
 <div class="col">
  <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
+
+</div>
+=======
         <a asp-action="Delete" asp-controller="Home" asp-route-id=@person.Id class="btn btn-danger">Delete</a>
 
 </div>
     @*<div class="col-lg-1">
     </div>*@
+
    
 }
 <br />
