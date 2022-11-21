@@ -36,10 +36,13 @@
 
 @foreach (var person in Model.tempList)
 {
+    <div class="col">
+        <a asp-action="Delete" asp-controller="Home" asp-route-id=@person.Id class="btn btn-danger">Delete</a>
+    </div>
 <div class="col">
  <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
-</div>
-   
+
+   </div>
 }
 
 @**<br />

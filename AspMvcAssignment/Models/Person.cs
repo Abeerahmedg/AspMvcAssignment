@@ -4,6 +4,7 @@ namespace AspMvcAssignment.Models
 {
     public class Person
     {
+        [Key]
         public string Id { get; set; }
         
         [Required]
