@@ -41,50 +41,8 @@
    
 <div class="col">
  <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
+        <a asp-action="Delete" asp-controller="Home" asp-route-id=@person.Id class="btn btn-danger">Delete</a>
 </div>
    
 }
-
-@**<br />
-    <input class="form-control" id="myInput" type="text" placeholder="Search..">
-    <div class="container">
-        <div class="row">
-            <div class="col-4">
-                <h6>
-                    @Html.DisplayNameFor(Model=>Model.Id)
-                </h6>
-            </div>
-            <div class="col-4">
-                <h6>
-                    @Html.DisplayNameFor(Model=>Model.Name)
-                </h6>
-            </div>
-            <div class="col-4">
-                <h6>
-                    @Html.DisplayNameFor(Model=>Model.NumberOfBooks)
-                </h6>
-            </div>
-            <div class="col-4">
-                <h5>
-
-                    @Html.DisplayNameFor(Model=>Model.City)
-                </h5>
-            </div>
-            <div class="col-4">
-
-            </div>
-        </div>
-        @if (Model.tempList.Count == null)
-        {
-            <h3>The list is Empty</h3>
-        }
-        else
-        {
-            foreach (var person in Model.tempList)
-            {
-                <partial name="_PeopleDetailsPArtial" model="person"/>
-
-}
-
-
 

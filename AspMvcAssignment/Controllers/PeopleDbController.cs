@@ -14,7 +14,7 @@ namespace AspMvcAssignment.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_context.People.ToList());
         }
     }
 }
