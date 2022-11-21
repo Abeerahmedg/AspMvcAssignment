@@ -14,14 +14,7 @@
 </form>
 
 
-<div class="text-center">
-    <form method="post" action="@Url.ActionLink("CreatePerson", "Home")">
-        <input type="text" name="Name" placeholder="Name">
-        <input type="text" name="NumberOfBooks" placeholder="Number of books">
-        <input type="text" name="City" placeholder="City">
-        <input type="submit" value="Add">
-    </form>
-</div>
+
 <br />
 <div class="container">
 <div class="row">
@@ -29,7 +22,7 @@
     <p class="col">City</p>
     <p class="col">Number of books</p>
     <p class="col">ID</p>
-    <p class="col"> </p>
+   
 
 </div>
 </div>
@@ -38,12 +31,23 @@
 {
 <div class="col">
  <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
-</div>
-    <div>
         <a asp-action="Delete" asp-controller="Home" asp-route-id=@person.Id class="btn btn-danger">Delete</a>
-    </div>
+
+</div>
+    @*<div class="col-lg-1">
+    </div>*@
    
 }
+<br />
+<div class="text-center">
+    <h5>Add new writer:</h5>
+    <form method="post" action="@Url.ActionLink("CreatePerson", "Home")">
+        <input type="text" name="Name" placeholder="Name">
+        <input type="text" name="NumberOfBooks" placeholder="Number of books">
+        <input type="text" name="City" placeholder="City">
+        <input type="submit" value="Add">
+    </form>
+</div>
 
 @**<br />
     <input class="form-control" id="myInput" type="text" placeholder="Search..">
