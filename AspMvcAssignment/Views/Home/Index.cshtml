@@ -1,3 +1,4 @@
+@using AspMvcAssignment.Models
 @model PeopleViewModel
 
 @{
@@ -9,23 +10,37 @@
     <div>
         <h5>Add new writer:</h5>
         <form method="post" asp-action="CreatePerson" asp-controller="Home">
-            <input type="text" name="Name" placeholder="Name">
-            <input type="text" name="NumberOfBooks" placeholder="Number of books">
-            <input type="text" name="City" placeholder="City">
-            <input type="submit" value="Add">
+            <div>
+                <label asp-for="@Model.cpvm.Name"></label>
+                <input asp-for="@Model.cpvm.Name" placeholder="Name">
+                <span asp-validation-for="@Model.cpvm.Name"></span>
+            </div>
+            <div>
+                <label asp-for="@Model.cpvm.NumberOfBooks"></label>
+                <input asp-for="@Model.cpvm.NumberOfBooks" placeholder="Number of books">
+                <span asp-validation-for="@Model.cpvm.NumberOfBooks"></span>
+            </div>
+            <div>
+                <label asp-for="@Model.cpvm.City"></label>
+                <input asp-for="@Model.cpvm.City" placeholder="City">
+                <span asp-validation-for="@Model.cpvm.City"></span>
+            </div>
+            <div>
+                <input type="submit" value="Add">
+            </div>
         </form>
     </div>
-    <br />
+    <div style="white-space: pre"> </div>
 
-<form method="post" asp-action="Index" asp-controller="Home">
-    <div class="search-form">
-        <input type="text" name="search" placeholder="Search">
-        <input type="submit" value="Search">
-    </div>
-</form>
-<br />
+    <form method="post" asp-action="Search" asp-controller="Home">
+        <div class="search-form">
+            <input type="text" name="Search" value="@Model.Search" placeholder="Search" />
+            <input type="submit" value="search" />
+        </div>
+    </form>
 
-<br />
+    <div style="white-space: pre"> </div>
+
 
     <div class="row">
         <div class="col-4">ID</div>
@@ -36,13 +51,13 @@
     </div>
 
 
-    @foreach (var person in Model.tempList)
+    @foreach (var person in Model.PeopleList)
     {
 
 
         <div class="row">
             <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
-            
+
         </div>
     }
 

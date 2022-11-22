@@ -7,7 +7,7 @@ namespace AspMvcAssignment.Models
         [Key]
         public string Id { get; set; }
         
-        [Required]
+        [Required(ErrorMessage="Please enter writer name." )]
         public string Name { get; set; }
         
         [Required]

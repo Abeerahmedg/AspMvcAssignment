@@ -2,63 +2,71 @@ using System.Reflection;
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspMvcAssignment.Controllers
 {
     public class HomeController : Controller
     {
+       static PeopleViewModel pvm = new PeopleViewModel();
         public IActionResult Index()
         {
-            if (PeopleViewModel.PeopleList.Count == 0)
-            { 
-                PeopleViewModel.FillPeople();
-
+            if (pvm.PeopleList.Count == 0)
+            {
+                pvm.FillPeople();
             }
-                PeopleViewModel pvm = new PeopleViewModel();
-                pvm.tempList = PeopleViewModel.PeopleList;
-            
+          
+
             return View(pvm);
         }
-        
+
         public IActionResult Delete(string id)
         {
-            Person person = PeopleViewModel.PeopleList.FirstOrDefault(s => s.Id == id);
-          
-            PeopleViewModel.PeopleList.Remove(person);
+            Person person = pvm.PeopleList.FirstOrDefault(s => s.Id == id);
+
+            pvm.PeopleList.Remove(person);
 
             return RedirectToAction("Index");
 
         }
 
         [HttpPost]
-     public IActionResult CreatePerson(CreatePersonViewModel createPerson)
+        public IActionResult CreatePerson(PeopleViewModel peopleViewModel)
         {
-            
+
             if (ModelState.IsValid)
             {
-                Person person = new Person(Guid.NewGuid().ToString(), createPerson.Name, createPerson.NumberOfBooks, createPerson.City);
-                PeopleViewModel.PeopleList.Add(person);
+                Person createPerson = new Person(Guid.NewGuid().ToString(), peopleViewModel.cpvm.Name, peopleViewModel.cpvm.NumberOfBooks, peopleViewModel.cpvm.City);
+                pvm.PeopleList.Add(createPerson);
+            } else
+            {
+                if (pvm.PeopleList.Count == 0)
+                {
+                    pvm.FillPeople();
+
+                }
+                //pvm.tempList = pvm.PeopleList;
+                return View("Index", pvm);
             }
-            
+
             return RedirectToAction("Index");
         }
 
+      
         [HttpPost]
-        public IActionResult Index(string search)
+        public IActionResult Search(string search)
         {
-            PeopleViewModel pvm = new();
-            if (search == null || search.Trim() == "")
+
+
+            if (String.IsNullOrEmpty(search))
+
             {
                 return RedirectToAction("Index");
             }
-            foreach (Person person in PeopleViewModel.PeopleList)
-            {
-                if (person.Name.Contains(search) || person.City.Contains(search))
-                {
-                    pvm.tempList.Add(person);
-                }
-            }
-            return View(pvm);
+           
+            pvm.PeopleList = pvm.PeopleList.Where(x => x.Name.Contains(search)).ToList();
+            pvm.Search = search;
+            return View("Index", pvm);
         }
 
     }

@@ -1,17 +1,41 @@
-﻿@model IEnumerable<Person>
+﻿@model PeopleViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<div><a asp-action="Create" class="btn btn-primary">Add new writer</a></div>
-<br />
 
-@*<form method="post" action="@Url.ActionLink("Index" , "PeopleDb")">
+<div>
+    <h5>Add new writer:</h5>
+    <form method="post" asp-action="Create" asp-controller="PeopleDb">
+        <div>
+            <label asp-for ="@Model.cpvm.Name"></label>
+            <input asp-for="@Model.cpvm.Name" placeholder="Name">
+            <span asp-validation-for="@Model.cpvm.Name"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.cpvm.NumberOfBooks"></label>
+        <input asp-for="@Model.cpvm.NumberOfBooks" placeholder="Number of books">
+            <span asp-validation-for="@Model.cpvm.NumberOfBooks"></span>
+        </div>
+        <div>
+            <label asp-for="@Model.cpvm.City"></label>
+        <input asp-for="@Model.cpvm.City" placeholder="City">
+            <span asp-validation-for="@Model.cpvm.City"></span>
+        </div>
+        <div>
+            <input type="submit" value="Add">
+        </div>
+    </form>
+</div>
+<div style="white-space: pre"> </div>
+
+<form method="post" asp-action="Search" asp-controller="PeopleDb">
     <div class="search-form">
-        <input type="text" name="search" placeholder="Search" />
+        <input type="text" name="Search" value="@Model.Search" placeholder="Search" />
         <input type="submit" value="search" />
     </div>
-</form>*@
+</form>
+<div style="white-space: pre"> </div>
 
 <h3>List of writers</h3>
 
@@ -26,7 +50,7 @@
     </tr>
     </thead>
     <tbody>
-        @foreach(var person in Model)
+        @foreach(var person in Model.PeopleList)
         {
             <tr>
                 <td>@person.Id</td>
