@@ -8,6 +8,7 @@ namespace AspMvcAssignment.ViewModels
         [Required]
         public string Name { get; set; }
         [Required]
+        [Display(Name ="Number Of Books" )]
         public int NumberOfBooks { get; set; }
         [Required]
         public string City { get; set; }

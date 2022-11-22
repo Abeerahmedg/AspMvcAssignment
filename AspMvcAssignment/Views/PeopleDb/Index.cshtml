@@ -4,26 +4,29 @@
 }
 
 
-<div>
+<div class="container">
     <h5>Add new writer:</h5>
     <form method="post" asp-action="Create" asp-controller="PeopleDb">
-        <div>
-            <label asp-for ="@Model.cpvm.Name"></label>
+        <div class="form-group">
+            <label asp-for ="@Model.cpvm.Name"> Name:</label>
+            <div style="white-space: pre-line"> </div>
             <input asp-for="@Model.cpvm.Name" placeholder="Name">
             <span asp-validation-for="@Model.cpvm.Name"></span>
         </div>
-        <div>
-            <label asp-for="@Model.cpvm.NumberOfBooks"></label>
+        <div class="form-group">
+            <label asp-for="@Model.cpvm.NumberOfBooks">Number of books:</label>
+            <div style="white-space: pre-line"> </div>
         <input asp-for="@Model.cpvm.NumberOfBooks" placeholder="Number of books">
             <span asp-validation-for="@Model.cpvm.NumberOfBooks"></span>
         </div>
-        <div>
-            <label asp-for="@Model.cpvm.City"></label>
+        <div class="form-group">
+            <label asp-for="@Model.cpvm.City">City:</label>
+            <div style="white-space: pre-line"> </div>
         <input asp-for="@Model.cpvm.City" placeholder="City">
             <span asp-validation-for="@Model.cpvm.City"></span>
         </div>
         <div>
-            <input type="submit" value="Add">
+            <input type="submit" value="Add" class="btn btn-success">
         </div>
     </form>
 </div>
@@ -31,7 +34,7 @@
 
 <form method="post" asp-action="Search" asp-controller="PeopleDb">
     <div class="search-form">
-        <input type="text" name="Search" value="@Model.Search" placeholder="Search" />
+        <input type="text" name="Search" value="@Model." placeholder="Search" />
         <input type="submit" value="search" />
     </div>
 </form>
