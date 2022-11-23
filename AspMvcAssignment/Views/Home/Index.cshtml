@@ -6,38 +6,38 @@
 }
 
 <div class="container">
+    <div class="col-md-6 col-md-offset-3">
     <h5>Add new writer:</h5>
     <form method="post" asp-action="CreatePerson" asp-controller="Home">
         <div class="form-group">
             <label asp-for ="@Model.cpvm.Name"> Name:</label>
-            <div style="white-space: pre-line"> </div>
-            <input asp-for="@Model.cpvm.Name" placeholder="Name">
-            <span asp-validation-for="@Model.cpvm.Name"></span>
+            <input asp-for="@Model.cpvm.Name" placeholder="Name" class="form-control">
+            <span asp-validation-for="@Model.cpvm.Name" class="text-warning"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.cpvm.NumberOfBooks">Number of books:</label>
-            <div style="white-space: pre-line"> </div>
-        <input asp-for="@Model.cpvm.NumberOfBooks" placeholder="Number of books">
-            <span asp-validation-for="@Model.cpvm.NumberOfBooks"></span>
+                <input asp-for="@Model.cpvm.NumberOfBooks" placeholder="Number of books" class="form-control">
+                <span asp-validation-for="@Model.cpvm.NumberOfBooks" class="text-warning"></span>
         </div>
         <div class="form-group">
             <label asp-for="@Model.cpvm.City">City:</label>
-            <div style="white-space: pre-line"> </div>
-        <input asp-for="@Model.cpvm.City" placeholder="City">
-            <span asp-validation-for="@Model.cpvm.City"></span>
+                <input asp-for="@Model.cpvm.City" placeholder="City" class="form-control">
+                <span asp-validation-for="@Model.cpvm.City" class="text-warning"></span>
         </div>
         <div>
-            <input type="submit" value="Add" class="btn btn-success">
+            <input type="submit" value="Add" class="btn btn-primary">
         </div>
-    </form>
+        </form>
+    </div>
     <div style="white-space: pre"> </div>
-
+    <div col-md-6 col-md-offset-3>
     <form method="post" asp-action="Search" asp-controller="Home">
         <div class="search-form">
-            <input type="text" name="Search" value="@Model.Search" placeholder="Search" />
+            <input type="text" name="Search" value="" placeholder="Search" />
             <input type="submit" value="search" />
         </div>
-    </form>
+        </form>
+    </div>
 
     <div style="white-space: pre"> </div>
 

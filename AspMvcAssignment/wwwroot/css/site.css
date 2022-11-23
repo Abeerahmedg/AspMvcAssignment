@@ -49,3 +49,8 @@ input[type="checkbox"].input-validation-error {
 .container {
     padding-top: 60px;
 }
+.Addnew {
+    padding : 5px;
+    border : 2px black inset;
+    display: inline-block
+}
