@@ -25,13 +25,14 @@ namespace AspMvcAssignment.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(PeopleViewModel peopleViewModel)
+        public IActionResult Create(Person person)
         {
-            // ModelState.Remove("Id");
+
+             ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
-                Person createPerson = new Person(Guid.NewGuid().ToString(), peopleViewModel.cpvm.Name, peopleViewModel.cpvm.NumberOfBooks, peopleViewModel.cpvm.City);
-                _context.People.Add(createPerson);
+                
+                _context.People.Add(person);
                 _context.SaveChanges();
 
             }
@@ -44,9 +45,11 @@ namespace AspMvcAssignment.Controllers
         }
         public IActionResult Delete(string id)
         {
-            if (id != null)
+            int prsonId = int.Parse(id);
+            Person person = _context.People.FirstOrDefault(x => x.Id == prsonId);
+            if (person != null)
             {
-                Person person = _context.People.Find(id);
+                person = _context.People.Find(id);
                 if (person != null)
                 {
                     _context.People.Remove(person);

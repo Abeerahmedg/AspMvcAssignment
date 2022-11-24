@@ -16,15 +16,18 @@ namespace AspMvcAssignment.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.11")
+                .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("AspMvcAssignment.Models.Person", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -44,28 +47,28 @@ namespace AspMvcAssignment.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1a00b3c0-b630-4a13-acb9-41d45ec943df",
+                            Id = 1,
                             City = "Devon",
                             Name = "Agatha Christie",
                             NumberOfBooks = 85
                         },
                         new
                         {
-                            Id = "8d32397a-9c9e-4bf5-a4df-8f5234d46e70",
+                            Id = 2,
                             City = "New Hampshire",
                             Name = "Dan Brown",
                             NumberOfBooks = 7
                         },
                         new
                         {
-                            Id = "93e2a945-a082-48e8-9d2d-996e03da8962",
+                            Id = 3,
                             City = "Tokyo",
                             Name = "Yasuo Uchida",
                             NumberOfBooks = 130
                         },
                         new
                         {
-                            Id = "45d7888d-621b-4c0d-ba00-a7bf2593f805",
+                            Id = 4,
                             City = "Tanta",
                             Name = "Ahmed Tawfik",
                             NumberOfBooks = 200

@@ -5,7 +5,7 @@ namespace AspMvcAssignment.Models
     public class Person
     {
         [Key]
-        public string Id { get; set; }
+        public int Id { get; set; }
         
         [Required(ErrorMessage="Please enter writer name." )]
         public string Name { get; set; }
@@ -17,12 +17,6 @@ namespace AspMvcAssignment.Models
         [Required]
         public string City { get; set; }
 
-        public Person (string id, string name, int numberOfBooks, string city)
-        {
-            Id = id;
-            Name = name;
-            NumberOfBooks = numberOfBooks;
-            City = city;
-        }
+       
     }
 }

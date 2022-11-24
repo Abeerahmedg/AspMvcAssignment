@@ -22,13 +22,16 @@ namespace AspMvcAssignment.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Person>().HasData(new Person ( Guid.NewGuid().ToString(), "Agatha Christie", 85, "Devon"));
-            modelBuilder.Entity<Person>().HasData(new Person (Guid.NewGuid().ToString(),"Dan Brown",7,"New Hampshire"));
-            modelBuilder.Entity<Person>().HasData(new Person (Guid.NewGuid().ToString(),"Yasuo Uchida",130,"Tokyo"));
-            modelBuilder.Entity<Person>().HasData(new Person (Guid.NewGuid().ToString(),"Ahmed Tawfik",200,"Tanta"));
+            modelBuilder.Entity<Person>().HasData(new Person {Id = 1, Name ="Agatha Christie" , NumberOfBooks= 85, City= "Devon" });
+            modelBuilder.Entity<Person>().HasData(new Person { Id= 2, Name="Dan Brown", NumberOfBooks=7, City="New Hampshire" });
+            modelBuilder.Entity<Person>().HasData(new Person {Id = 3, Name="Yasuo Uchida", NumberOfBooks=130, City="Tokyo" });
+            modelBuilder.Entity<Person>().HasData(new Person {Id=4, Name="Ahmed Tawfik", NumberOfBooks=200, City="Tanta"});
 
         }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
     }
 }
 

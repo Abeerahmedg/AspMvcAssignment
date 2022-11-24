@@ -19,12 +19,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "Index",
-    pattern: "Ajax",
-    defaults: new { controller = "Ajax", action = "Index" });
+//app.MapControllerRoute(
+//    name: "Index",
+//    pattern: "Ajax",
+//    defaults: new { controller = "Ajax", action = "Index" });
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=PeopleDb}/{action=Index}/{id?}");
 app.Run();

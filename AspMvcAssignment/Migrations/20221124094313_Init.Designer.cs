@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspMvcAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221122131225_newMigration")]
-    partial class newMigration
+    [Migration("20221124094313_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,8 +25,11 @@ namespace AspMvcAssignment.Migrations
 
             modelBuilder.Entity("AspMvcAssignment.Models.Person", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -46,28 +49,28 @@ namespace AspMvcAssignment.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bdb0f3f0-859a-4b6d-9e72-6e837e829096",
+                            Id = 1,
                             City = "Devon",
                             Name = "Agatha Christie",
                             NumberOfBooks = 85
                         },
                         new
                         {
-                            Id = "84262a31-5655-42c9-a830-bbb1cee079e7",
+                            Id = 2,
                             City = "New Hampshire",
                             Name = "Dan Brown",
                             NumberOfBooks = 7
                         },
                         new
                         {
-                            Id = "25f18183-9676-4838-bd58-39faf3d1fa6e",
+                            Id = 3,
                             City = "Tokyo",
                             Name = "Yasuo Uchida",
                             NumberOfBooks = 130
                         },
                         new
                         {
-                            Id = "ac10e7e0-2ec0-4df1-8285-50eabf98b991",
+                            Id = 4,
                             City = "Tanta",
                             Name = "Ahmed Tawfik",
                             NumberOfBooks = 200

@@ -13,7 +13,7 @@ namespace AspMvcAssignment.Controllers
             return View(pvm);
         }
         [HttpPost]
-        public IActionResult GetDetails(string id)
+        public IActionResult GetDetails(int id)
         {
             //Person person = PeopleViewModel.PeopleList.FirstOrDefault(i => i.Id == id);
             //if (person == null)
@@ -24,7 +24,7 @@ namespace AspMvcAssignment.Controllers
             PeopleViewModel pvm = new();
             foreach (Person person in pvm.PeopleList)
             {
-                if (person.Id == id.Trim())
+                if (person.Id == id)
                 {
                     pvm.tempList.Add(person);
                     return PartialView("_PersonPartial", pvm);
@@ -35,7 +35,7 @@ namespace AspMvcAssignment.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(int id)
         {
             foreach (Person person in pvm.PeopleList)
             {
