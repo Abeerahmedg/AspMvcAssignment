@@ -31,12 +31,14 @@ namespace AspMvcAssignment.Controllers
         public IActionResult Create(PeopleViewModel m)
         {
             CreatePersonViewModel cpvm = new CreatePersonViewModel();
+            //ModelState.Remove("CityName");
             ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
                 var addPerson = new Person() { Name = m.cpvm.Name, NumberOfBooks = m.cpvm.NumberOfBooks, CityId = m.cpvm.CityId };
                 _context.People.Add(addPerson);
                 _context.SaveChanges();
+                return RedirectToAction("Index");
 
             }
             else

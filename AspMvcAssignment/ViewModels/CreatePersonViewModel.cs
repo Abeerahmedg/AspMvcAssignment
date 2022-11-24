@@ -13,7 +13,6 @@ namespace AspMvcAssignment.ViewModels
         [Required]
         public int CityId { get; set; }
 
-
        // public bool IsValidForm()
        // {
        //     return ((!string.IsNullOrWhiteSpace(Name))

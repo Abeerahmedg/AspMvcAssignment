@@ -22,7 +22,7 @@
                 <div class="form-group row">
                     <label asp-for="cpvm.CityId" class="col-sm-1 col-form-label">City </label>
                     <div class="col-sm-5">
-                        <select name="cityId" class="form-control" asp-items="ViewBag.CityNames">
+                        <select asp-for="cpvm.CityId" class="form-control" asp-items="ViewBag.CityNames">
                             <option value="" selected disabled>Select City</option>
                         </select>
                         <span asp-validation-for="cpvm.CityId"></span>
