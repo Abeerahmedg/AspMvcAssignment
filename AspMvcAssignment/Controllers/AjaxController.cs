@@ -6,10 +6,10 @@ namespace AspMvcAssignment.Controllers
 {
     public class AjaxController : Controller
     {
+        PeopleViewModel pvm = new();
         public IActionResult Index()
         {
-            PeopleViewModel pvm = new();
-            pvm.tempList = PeopleViewModel.PeopleList;
+            pvm.tempList = pvm.PeopleList;
             return View(pvm);
         }
         [HttpPost]
@@ -21,8 +21,8 @@ namespace AspMvcAssignment.Controllers
             //    return Json("The writer name was not found!");
             //}
             //return PartialView("_PeoplePartial", person);
-           PeopleViewModel pvm = new();
-            foreach (Person person in PeopleViewModel.PeopleList)
+            PeopleViewModel pvm = new();
+            foreach (Person person in pvm.PeopleList)
             {
                 if (person.Id == id.Trim())
                 {
@@ -30,18 +30,18 @@ namespace AspMvcAssignment.Controllers
                     return PartialView("_PersonPartial", pvm);
                 }
             }
-            pvm.tempList = PeopleViewModel.PeopleList;
+            pvm.tempList = pvm.PeopleList;
             return Json("The writer name was not found!");
         }
 
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            foreach (Person person in PeopleViewModel.PeopleList)
+            foreach (Person person in pvm.PeopleList)
             {
                 if (person.Id == id)
                 {
-                    PeopleViewModel.PeopleList.Remove(person);
+                    pvm.PeopleList.Remove(person);
                     return Json(id + " was Succefully deleted");
                 }
             }
@@ -51,9 +51,9 @@ namespace AspMvcAssignment.Controllers
         public IActionResult CreatePeople()
         {
             PeopleViewModel pvm = new();
-            pvm.tempList = PeopleViewModel.PeopleList;
-   
-            return PartialView("_PeoplePartial",pvm);
+            pvm.tempList = pvm.PeopleList;
+
+            return PartialView("_PeoplePartial", pvm);
         }
     }
 }

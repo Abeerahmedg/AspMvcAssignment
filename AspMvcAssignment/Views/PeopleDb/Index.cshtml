@@ -1,13 +1,12 @@
-@using AspMvcAssignment.Models
-@model PeopleViewModel
-
+﻿@model PeopleViewModel
 @{
-    ViewData["Title"] = "Writer List";
+    ViewData["Title"] = "Index";
 }
+
 
 <div class="container">
     <h5>Add new writer:</h5>
-    <form method="post" asp-action="CreatePerson" asp-controller="Home">
+    <form method="post" asp-action="Create" asp-controller="PeopleDb">
         <div class="form-group">
             <label asp-for ="@Model.cpvm.Name"> Name:</label>
             <div style="white-space: pre-line"> </div>
@@ -30,37 +29,40 @@
             <input type="submit" value="Add" class="btn btn-success">
         </div>
     </form>
-    <div style="white-space: pre"> </div>
-
-    <form method="post" asp-action="Search" asp-controller="Home">
-        <div class="search-form">
-            <input type="text" name="Search" value="@Model.Search" placeholder="Search" />
-            <input type="submit" value="search" />
-        </div>
-    </form>
-
-    <div style="white-space: pre"> </div>
-
-
-    <div class="row">
-        <div class="col-4">ID</div>
-        <div class="col-2">Name</div>
-        <div class="col-1">City</div>
-        <div class="col-1">Number of books</div>
-        <div class="col-4"></div>
-    </div>
-
-
-    @foreach (var person in Model.PeopleList)
-    {
-
-
-        <div class="row">
-            <partial name="~/Views/Shared/_PeopleDetailsPartial.cshtml" model="person" />
-
-        </div>
-    }
-
-
 </div>
+<div style="white-space: pre"> </div>
 
+<form method="post" asp-action="Search" asp-controller="PeopleDb">
+    <div class="search-form">
+        <input type="text" name="Search" value="@Model." placeholder="Search" />
+        <input type="submit" value="search" />
+    </div>
+</form>
+<div style="white-space: pre"> </div>
+
+<h3>List of writers</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Number of books</th>
+        <th>City</th>
+        <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach(var person in Model.PeopleList)
+        {
+            <tr>
+                <td>@person.Id</td>
+                <td>@person.Name</td>
+                <td>@person.NumberOfBooks</td>
+                <td>@person.City</td>
+                <td><a asp-action="Delete" asp-route-id=@person.Id class="btn btn-danger">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+
+</table>
