@@ -8,11 +8,13 @@ namespace AspMvcAssignment.Models
         public int CityId { get; set; }
        
         [Required]
-        public string cityName { get; set; }
+        [Display(Name ="City")]
+        public string CityName { get; set; }
 
         //Navigation Properties
-        public List<Person>People { get; set; } 
+        public List<Person> People { get; set; } 
+
         public int CountryId { get; set; }
-        public Country country { get; set; }
+        public Country Country { get; set; }
     }
 }

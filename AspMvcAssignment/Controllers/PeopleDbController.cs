@@ -2,13 +2,15 @@
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspMvcAssignment.Controllers
 {
     public class PeopleDbController : Controller
     {
         readonly ApplicationDbContext _context;
-        public PeopleViewModel peopleModel { get; set; }= new PeopleViewModel();
+        public PeopleViewModel peopleModel { get; set; } = new PeopleViewModel();
 
         public PeopleDbController(ApplicationDbContext context)
         {
@@ -17,7 +19,8 @@ namespace AspMvcAssignment.Controllers
 
         public IActionResult Index()
         {
-            peopleModel.PeopleList = _context.People.ToList();
+            ViewBag.CityNames = new SelectList(_context.Cities, "CityId", "CityName");
+            peopleModel.PeopleList = _context.People.Include(x => x.City).ToList();
             return View(peopleModel);
         }
         public IActionResult Create()
@@ -25,38 +28,37 @@ namespace AspMvcAssignment.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(Person person)
+        public IActionResult Create(PeopleViewModel m)
         {
-
-             ModelState.Remove("Id");
+            CreatePersonViewModel cpvm = new CreatePersonViewModel();
+            ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
-                
-                _context.People.Add(person);
+                var addPerson = new Person() { Name = m.cpvm.Name, NumberOfBooks = m.cpvm.NumberOfBooks, CityId = m.cpvm.CityId };
+                _context.People.Add(addPerson);
                 _context.SaveChanges();
 
             }
             else
             {
                 peopleModel.PeopleList = _context.People.ToList();
-                return View("Index",peopleModel);
+                return View("Index", peopleModel);
             }
             return RedirectToAction("Index");
         }
         public IActionResult Delete(string id)
         {
             int prsonId = int.Parse(id);
-            Person person = _context.People.FirstOrDefault(x => x.Id == prsonId);
+            Person person = _context.People.Find(prsonId);
+
+           
             if (person != null)
             {
-                person = _context.People.Find(id);
-                if (person != null)
-                {
-                    _context.People.Remove(person);
-                    _context.SaveChanges();
-                }
-
+                _context.People.Remove(person);
+                _context.SaveChanges();
             }
+
+
             return RedirectToAction("Index");
         }
         [HttpPost]
@@ -65,7 +67,7 @@ namespace AspMvcAssignment.Controllers
 
 
             if (String.IsNullOrEmpty(search))
-            
+
             {
                 return RedirectToAction("Index");
             }
@@ -76,9 +78,9 @@ namespace AspMvcAssignment.Controllers
             //        _context.People.Add(person);
             //    }
             //}
-            peopleModel.PeopleList= _context.People.Where(x=>x.Name.Contains(search)).ToList();
+            peopleModel.PeopleList = _context.People.Where(x => x.Name.Contains(search)).ToList();
             peopleModel.Search = search;
-            return View("Index",peopleModel);
+            return View("Index", peopleModel);
         }
 
     }

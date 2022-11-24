@@ -15,8 +15,9 @@ namespace AspMvcAssignment.Models
         public int NumberOfBooks { get; set; }
         
         [Required]
-        public string City { get; set; }
+        public int CityId { get; set; }
 
+        public City City { get; set; }
        
     }
 }

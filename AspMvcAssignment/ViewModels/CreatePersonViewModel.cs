@@ -11,7 +11,7 @@ namespace AspMvcAssignment.ViewModels
         [Display(Name ="Number Of Books" )]
         public int NumberOfBooks { get; set; }
         [Required]
-        public string City { get; set; }
+        public int CityId { get; set; }
 
 
        // public bool IsValidForm()

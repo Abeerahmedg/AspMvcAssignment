@@ -1,15 +1,28 @@
-﻿@model List<City>
+﻿@model CityViewModel
 @{
     ViewData["Title"] = "Cities";
 }
+<div><a asp-action="Create" class="btn btn-primary">Add new City</a></div>
 <h3>List of Cities</h3>
 <table class="table">
     <thead>
         <tr>
             <th>City Id</th>
-            <th></th>
-            <th></th>
+            <th>City Name</th>
+            <th>Country</th>
             <th></th>
         </tr>
     </thead>
+    <tbody>
+        @foreach (var city in Model.Cities)
+        {
+            <tr>
+                <td>@city.CityId</td>
+                <td>@city.CityName</td>
+                <td>@city.Country.CountryName</td>
+                <td><a asp-action="Delete" asp-route-id=@city.CityId class="btn btn-danger">Delete</a></td>
+            </tr>
+            
+        }
+    </tbody>
 </table>

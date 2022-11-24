@@ -8,7 +8,8 @@ namespace AspMvcAssignment.Models
         public int CountryId { get; set; }
         [Required]
         public string CountryName { get; set; }
-        public List<City> Cities { get; set; }
+
+        public List<City> Cities { get; set; } = new List<City>();
 
     }
 }
