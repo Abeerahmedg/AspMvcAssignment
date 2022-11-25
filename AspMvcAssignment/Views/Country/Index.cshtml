@@ -1,0 +1,43 @@
+﻿@model CountryViewModel
+@{
+    ViewData["Title"] = "Cities";
+}
+<div class="col-md-6 col-md-offset-3">
+    <h5>Add new Country:</h5>
+    <form method="post" asp-action="Create" asp-controller="Country">
+        <div class="form-group">
+            <label asp-for="@Model.CountryName"> Name:</label>
+            <input asp-for="@Model.CountryName" placeholder="Name" class="form-control">
+            <span asp-validation-for="@Model.CountryName" class="text-warning"></span>
+        </div>
+      
+        <div>
+            <input type="submit" value="Add" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+<h3>List of Contries</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Country Id</th>
+            <th>Country Name</th>
+            <th>Cities List</th>
+            
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var country in Model.Countries)
+        {
+            <tr>
+                <td>@country.CountryId</td>
+                <td>@country.CountryName</td>
+         
+                <td><a asp-action="Delete" asp-route-countryId=@country.CountryId class="btn btn-danger">Delete</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+

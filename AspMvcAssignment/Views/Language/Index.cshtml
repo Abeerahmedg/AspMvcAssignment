@@ -1,0 +1,46 @@
+﻿@model LanguageViewModel
+@{
+    ViewData["Title"] = "Languages";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<form asp-controller="Language" asp-action="Index" method="post">
+    <h4>Add language</h4>
+    <div asp-validation-summary="ModelOnly"></div>
+
+    <label asp-for="LanguageName" class="left"></label>
+    <input asp-for="LanguageName" />
+    <label class="left"></label>
+    <span asp-validation-for="LanguageName" class="validation"></span>
+
+    <label class="left">&nbsp;</label>
+    <input type="submit" value="Add language" class="create" />
+
+</form>
+
+<h3>List of Languages</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Language Id</th>
+            <th>Language</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var language in Model.Languages)
+        {
+            <tr>
+                <td>@language.LanguageId</td>
+                <td>@language.LanguageName</td>
+            
+
+                <td><a asp-action="Delete" asp-route-id=@language.LanguageId class="btn btn-danger">Delete</a></td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+<p><a asp-controller="People" asp-action="Index">Back to index</a></p>

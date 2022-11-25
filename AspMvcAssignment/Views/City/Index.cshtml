@@ -2,7 +2,32 @@
 @{
     ViewData["Title"] = "Cities";
 }
-<div><a asp-action="Create" class="btn btn-primary">Add new City</a></div>
+
+<div class="col-md-6 col-md-offset-3">
+    <h5>Add new City:</h5>
+    <form method="post" asp-action="Create" asp-controller="City">
+        <div class="form-group">
+            <label asp-for="@Model.CityName"> Name:</label>
+            <input asp-for="@Model.CityName" placeholder="Name" class="form-control">
+            <span asp-validation-for="@Model.CityName" class="text-warning"></span>
+        </div>
+ <div class="form-group">
+            <div class="form-group row">
+                <label asp-for="@Model.CountryId" class="col-sm-1 col-form-label">Country </label>
+                <div class="col-sm-7">
+                    <select asp-for="@Model.CountryId" class="form-control" asp-items="ViewBag.CountryNames">
+                        <option value="" selected disabled>Select Country</option>
+                    </select>
+                    <span asp-validation-for="@Model.CountryId"></span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Add" class="btn btn-primary">
+        </div>
+    </form>
+    </div>
+
 <h3>List of Cities</h3>
 <table class="table">
     <thead>
@@ -20,7 +45,7 @@
                 <td>@city.CityId</td>
                 <td>@city.CityName</td>
                 <td>@city.Country.CountryName</td>
-                <td><a asp-action="Delete" asp-route-id=@city.CityId class="btn btn-danger">Delete</a></td>
+                <td><a asp-action="Delete" asp-route-cityId=@city.CityId class="btn btn-danger">Delete</a></td>
             </tr>
             
         }

@@ -19,10 +19,42 @@ namespace AspMvcAssignment.Data
         public DbSet<Person> People { get; set; }
         public DbSet <City> Cities { get; set; }
         public DbSet <Country> Countries { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<PersonLanguage> PersonLanguages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            // primary keys
+            modelBuilder.Entity<Person>().HasKey(p => p.Id);
+            modelBuilder.Entity<City>().HasKey(c => c.CityId);
+            modelBuilder.Entity<Country>().HasKey(co => co.CountryId);
+            modelBuilder.Entity<Language>().HasKey(l => l.LanguageId);
+            modelBuilder.Entity<PersonLanguage>().HasKey(pl => new { pl.Id, pl.LanguageId });
+
+            // relationships
+            modelBuilder.Entity<City>()
+                .HasOne(ci => ci.Country)
+                .WithMany(co => co.Cities)
+                .HasForeignKey(ci => ci.CountryId);
+
+            modelBuilder.Entity<Person>()
+                .HasOne(p => p.City)
+                .WithMany(ci => ci.People)
+                .HasForeignKey(p => p.CityId);
+
+            // relationships (many to many)
+            modelBuilder.Entity<PersonLanguage>()
+                .HasOne(pl => pl.Person)
+                .WithMany(p => p.PersonLanguages)
+                .HasForeignKey(pl => pl.Id);
+
+            modelBuilder.Entity<PersonLanguage>()
+                .HasOne(pl => pl.Language)
+                .WithMany(l => l.PersonLanguages)
+                .HasForeignKey(pl => pl.LanguageId);
+
 
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 1, CountryName = "England" });
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 2, CountryName = "Canada" });
@@ -44,11 +76,30 @@ namespace AspMvcAssignment.Data
             modelBuilder.Entity<Person>().HasData(new Person {Id = 3, Name="Yasuo Uchida", NumberOfBooks=130, CityId=7 });
             modelBuilder.Entity<Person>().HasData(new Person {Id=4, Name="Ahmed Tawfik", NumberOfBooks=200, CityId = 6 });
 
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 1, LanguageName = "English" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 2, LanguageName = "Arabic" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 3, LanguageName = "Swedish" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 4, LanguageName = "Spanish" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 5, LanguageName = "Turkish" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 6, LanguageName = "Chinese" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 7, LanguageName = "Hindi" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 8, LanguageName = "French" });
+            modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 9, LanguageName = "Danish" });
+           
+
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {Id = 1, LanguageId = 1 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 1, LanguageId = 6 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 1 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 6 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 1 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 9 });
+            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 4, LanguageId = 2 });
+
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.EnableSensitiveDataLogging();
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.EnableSensitiveDataLogging();
+        //}
     }
 }
 

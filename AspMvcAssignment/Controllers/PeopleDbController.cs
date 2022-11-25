@@ -31,7 +31,7 @@ namespace AspMvcAssignment.Controllers
         public IActionResult Create(PeopleViewModel m)
         {
             CreatePersonViewModel cpvm = new CreatePersonViewModel();
-            //ModelState.Remove("CityName");
+            ModelState.Remove("CityName");
             ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
@@ -73,16 +73,24 @@ namespace AspMvcAssignment.Controllers
             {
                 return RedirectToAction("Index");
             }
-            //foreach (Person person in _context.People)
-            //{
-            //    if (person.Name.Contains(search) || person.City.Contains(search))
-            //    {
-            //        _context.People.Add(person);
-            //    }
-            //}
             peopleModel.PeopleList = _context.People.Where(x => x.Name.Contains(search)).ToList();
             peopleModel.Search = search;
             return View("Index", peopleModel);
+        }
+        [HttpGet]
+        public IActionResult ShowPerson(int personId)
+        {
+            Person person = _context.People.Find(personId);
+            if (person != null)
+            {
+                List<City> cities = _context.Cities.ToList();
+                City city = cities.SingleOrDefault(ci => ci.CityId == person.CityId);
+                ViewData["City"] = city.CityName;
+
+                List<Country> countries = _context.Countries.ToList();
+                ViewData["Country"] = countries.SingleOrDefault(co => co.CountryId == city.CountryId).CountryName;
+            }
+            return PartialView("~/Views/Shared/_PeopleDetailsPartial.cshtml", person);
         }
 
     }

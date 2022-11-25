@@ -14,10 +14,11 @@ namespace AspMvcAssignment.Models
         [Display(Name= "Number of books")]
         public int NumberOfBooks { get; set; }
         
-        [Required]
+        
         public int CityId { get; set; }
 
         public City City { get; set; }
-       
+
+        public List<PersonLanguage> PersonLanguages { get; set; }
     }
 }

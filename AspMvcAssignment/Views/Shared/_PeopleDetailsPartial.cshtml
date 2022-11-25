@@ -1,20 +1,10 @@
 @model Person;
 
 
-<div class="col-4">
-    <p>@Model.Id</p>
-</div>
+<h3>(ID: @Model.Id) @Model.Name,(Number of books: @Model.NumberOfBooks ) </h3>
 
-<div class="col-2">
-    <p>@Model.Name</p>
+<p>City: @ViewBag.City (@ViewBag.Country)</p>
 
-</div>
-<div class="col-1">
-    <p>@Model.City</p>
-</div>
-<div class="col-1">
-    <p>@Model.NumberOfBooks</p>
-</div>
 <div class="col-4">
     <b class="col"> <a asp-action="Delete" asp-controller="Home" asp-route-id=@Model.Id class="btn btn-danger">Delete</a></b>
 </div>

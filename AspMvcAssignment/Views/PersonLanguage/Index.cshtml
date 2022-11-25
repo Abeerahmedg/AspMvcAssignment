@@ -1,0 +1,33 @@
+﻿´@using AspMvcAssignment.Models
+@model PersonLanguageViewModel
+@{
+    ViewData["Title"] = "View/Delete Spoken Languages";
+}
+
+
+<h2>@ViewBag.Title</h2>
+
+<h3>List of Languages</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Person</th>
+            <th>Language</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PersonLanguages)
+        {
+            Person person = Model.People.FirstOrDefault(p => p.Id == item.Id);
+            Language language = Model.Languages.FirstOrDefault(l => l.LanguageId == item.LanguageId);
+            <tr>
+                <td>@person.Name</td>
+                <td>@language.LanguageName</td>
+                <td><a asp-controller="PersonLanguage" asp-action="Delete" asp-route-id="@item.Id" asp-route-lid="@item.LanguageId" class="btn btn-danger">Delete</a></td>
+                <td><a asp-controller="PersonLanguage" asp-action="Create" asp-route-id="@item.Id" class="btn btn-primary" >Add Language</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
