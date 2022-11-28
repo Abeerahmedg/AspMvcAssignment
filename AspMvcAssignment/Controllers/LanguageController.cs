@@ -52,49 +52,68 @@ namespace AspMvcAssignment.Controllers
 
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult Delete(int LanguageId , int id)
+        {
+            var person = _context.People.Include(x=>x.Languages).FirstOrDefault(x => x.Id == id);
+            var deleteLanguage = _context.Languages.Find(LanguageId);
+            if (deleteLanguage != null)
+            {
+                _context.Languages.Remove(deleteLanguage);
+                _context.SaveChanges();
+            }
+
+            return View("Index", new {id = id});
+        }
+        [HttpPost]
+        public IActionResult Details(int id)
+        {
+           
+            return View("Index");
+        }
+
+        //    ViewBag.LanguagNames = new SelectList(_context.Languages, "LanguageId", "LanguageName");
+        //    languageView.Languages = _context.Languages.Include(x=>x.Languages).ToList();
+        //    return View(languageView);
+        //}
+
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+
+        //public IActionResult Create(LanguageViewModel languageViewModel)
+        //{
+        //    if (!languageViewModel.IsValidForm())
+        //        return View(languageViewModel);
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        Language language = new();
+        //        language.LanguageName = languageViewModel.LanguageName;
+
+        //        _context.Languages.Add(language);
+        //        _context.SaveChanges();
+        //        return RedirectToAction(nameof(Index), "Person");
+        //    }
+        //    return View(languageViewModel);
+        //}
+
+        [HttpGet]
+        public IActionResult Delete(int LanguageId)
+        {
+            var deleteLanguage = _context.Languages.Find(LanguageId);
+            if (deleteLanguage != null)
+            {
+                _context.Languages.Remove(deleteLanguage);
+                _context.SaveChanges();
+            }
+
+            return View("Index");
+        }
     }
-
-    //    ViewBag.LanguagNames = new SelectList(_context.Languages, "LanguageId", "LanguageName");
-    //    languageView.Languages = _context.Languages.Include(x=>x.Languages).ToList();
-    //    return View(languageView);
-    //}
-
-    //public IActionResult Create()
-    //{
-    //    return View();
-    //}
-
-    //[HttpPost]
-
-    //public IActionResult Create(LanguageViewModel languageViewModel)
-    //{
-    //    if (!languageViewModel.IsValidForm())
-    //        return View(languageViewModel);
-
-    //    if (ModelState.IsValid)
-    //    {
-    //        Language language = new();
-    //        language.LanguageName = languageViewModel.LanguageName;
-
-    //        _context.Languages.Add(language);
-    //        _context.SaveChanges();
-    //        return RedirectToAction(nameof(Index), "Person");
-    //    }
-    //    return View(languageViewModel);
-    //}
-
-    //[HttpGet]
-    //public IActionResult Delete(int LanguageId)
-    //{
-    //    var deleteLanguage = _context.Languages.Find(LanguageId);
-    //    if (deleteLanguage != null)
-    //    {
-    //       _context.Languages.Remove(deleteLanguage);
-    //        _context.SaveChanges();
-    //    }
-
-    //    return View("Index");
-    //}
 }
 
 

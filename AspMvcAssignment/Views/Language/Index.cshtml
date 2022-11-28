@@ -43,56 +43,12 @@
     </tbody>
 </table>
 
-@model PeopleViewModel
-
-@{
-    ViewData["Title"] = "Cities";
-}
-
-<div class="text-center">
-    <form asp-action="AddLanguage" method="post">
-        <input type="text" name="LanguageName" placeholder="Language name">
-        <input type="submit" value="Add language" class="btn btn-primary">
-    </form>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Languages
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.people)
-        {
-            <tr>
-                <td>
-                    @item.Name
-                </td>
-                <td>
-                    <ul>
-                        @foreach (var language in item.Languages)
-                        {
-                            <li>
-                                @language.LanguageName
-                            </li>
-                        }
-                    </ul>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>*@
+*@
 
 @model PeopleViewModel
 
 @{
-    ViewData["Title"] = "Cities";
+    ViewData["Title"] = "Language";
 }
 
 <div class="text-center">
@@ -132,6 +88,8 @@
                         }
                     </ul>
                 </td>
+                <td><a asp-action="Delete" class="btn btn-danger" asp-route-LanguageId=@ViewBag.LanguageId>Remove Languages</a> </td>
+              @*<td><a asp-action="Details" class="btn btn-danger">Details</a></td>*@
                 
             </tr>
         }
