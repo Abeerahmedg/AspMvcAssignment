@@ -48,7 +48,7 @@ namespace AspMvcAssignment.Controllers
                 cvm.Cities = _context.Cities.ToList();
                 return View("Index", cvm);
             }
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
 
 

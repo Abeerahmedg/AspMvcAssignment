@@ -8,7 +8,7 @@ namespace AspMvcAssignment.ViewModels
         public List<Person> PeopleList { get; set; } = new List<Person>();
         public string Search { get; set; } = string.Empty;
         public List<Person> tempList { get; set; } = new List<Person>();
-
+        public List<Person> People { get; set; }
         public CreatePersonViewModel cpvm { get; set; } = new();
 
 

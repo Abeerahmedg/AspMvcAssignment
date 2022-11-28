@@ -10,11 +10,9 @@ namespace AspMvcAssignment.ViewModels
         [Display(Name = "Language")]
         public string LanguageName { get; set; }
 
-        public List<Language> Languages = new List<Language>();
+      public int LanguageId { get; set; }
+        public int Id { get; set; }
 
-        public bool IsValidForm()
-        {
-            return (!string.IsNullOrWhiteSpace(LanguageName));
-        }
+       
     }
 }

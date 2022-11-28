@@ -46,7 +46,7 @@ namespace AspMvcAssignment.Controllers
                 peopleModel.PeopleList = _context.People.ToList();
                 return View("Index", peopleModel);
             }
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
         }
         public IActionResult Delete(string id)
         {

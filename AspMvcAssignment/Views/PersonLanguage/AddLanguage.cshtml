@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@*@{
     ViewData["Title"] = "Add language to person";
 }
 
@@ -17,7 +16,7 @@
     </div>
     <input type="submit" value="Add language to person" class="btn btn-primary" />
 
-   @* <label asp-for="Id" class="left"></label>
+  <label asp-for="Id" class="left"></label>
     <select asp-for="Id" asp-items="@ViewBag.PeopleList"></select>
     <label class="left"></label>
     <span asp-validation-for="Id" class="validation"></span>
@@ -28,6 +27,6 @@
     <span asp-validation-for="LanguageId" class="validation"></span>
 
     <label class="left">&nbsp;</label>
-    <input type="submit" value="Add language to person" class="btn btn-primary" />*@
+    <input type="submit" value="Add language to person" class="btn btn-primary" />
 
-</form>
+</form>*@

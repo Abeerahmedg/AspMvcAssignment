@@ -67,8 +67,8 @@
                         <td>@person.NumberOfBooks</td>
                         <td>@person.City.CityName</td>
                         <td><a asp-action="Delete" asp-route-id=@person.Id class="btn btn-danger">Delete</a></td>
-                        <td><a asp-controller="PersonLanguage" asp-action="Index" class="btn btn-primary" asp-route-id=@person.Id>Spoken Languge</a></td>
-                        @*<td><a asp-action="ShowPerson" asp-route-id=@person.Id class="btn btn-primary">Details</a></td>*@
+                        @* <td><a asp-controller="PersonLanguage" asp-action="Index" class="btn btn-primary" asp-route-id=@person.Id>Spoken Languge</a></td>
+                        <td><a asp-action="ShowPerson" asp-route-id=@person.Id class="btn btn-primary">Details</a></td>*@
                     </tr>
                 }
             </tbody>
