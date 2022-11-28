@@ -1,13 +1,23 @@
-﻿@model PersonLanguage
+﻿
 @{
     ViewData["Title"] = "Add language to person";
 }
 
-<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Title</h3>
 
-<form asp-controller="PersonLanguage" asp-action="Index" method="post">
+<form asp-action="AddLanguageToPerson" method="post">
 
-    <label asp-for="Id" class="left"></label>
+    <div class="form-group">
+        <label>Person: </label>
+        <select name="id" class="form-control" asp-items="@ViewBag.People"></select>
+    </div>
+    <div class="form-group">
+        <label>Language: </label>
+        <select name="languageId" class="form-control" asp-items="@ViewBag.Languages"></select>
+    </div>
+    <input type="submit" value="Add language to person" class="btn btn-primary" />
+
+   @* <label asp-for="Id" class="left"></label>
     <select asp-for="Id" asp-items="@ViewBag.PeopleList"></select>
     <label class="left"></label>
     <span asp-validation-for="Id" class="validation"></span>
@@ -18,6 +28,6 @@
     <span asp-validation-for="LanguageId" class="validation"></span>
 
     <label class="left">&nbsp;</label>
-    <input type="submit" value="Add language to person" class="create" />
+    <input type="submit" value="Add language to person" class="btn btn-primary" />*@
 
 </form>

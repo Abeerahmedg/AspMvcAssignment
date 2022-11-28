@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspMvcAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221124124226_Seedes CitiesandCountries")]
-    partial class SeedesCitiesandCountries
+    [Migration("20221128114608_Seeded languages")]
+    partial class Seededlanguages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -134,6 +134,70 @@ namespace AspMvcAssignment.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AspMvcAssignment.Models.Language", b =>
+                {
+                    b.Property<int>("LanguageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LanguageId"), 1L, 1);
+
+                    b.Property<string>("LanguageName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LanguageId");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguageId = 1,
+                            LanguageName = "English"
+                        },
+                        new
+                        {
+                            LanguageId = 2,
+                            LanguageName = "Arabic"
+                        },
+                        new
+                        {
+                            LanguageId = 3,
+                            LanguageName = "Swedish"
+                        },
+                        new
+                        {
+                            LanguageId = 4,
+                            LanguageName = "Spanish"
+                        },
+                        new
+                        {
+                            LanguageId = 5,
+                            LanguageName = "Turkish"
+                        },
+                        new
+                        {
+                            LanguageId = 6,
+                            LanguageName = "Chinese"
+                        },
+                        new
+                        {
+                            LanguageId = 7,
+                            LanguageName = "Hindi"
+                        },
+                        new
+                        {
+                            LanguageId = 8,
+                            LanguageName = "French"
+                        },
+                        new
+                        {
+                            LanguageId = 9,
+                            LanguageName = "Danish"
+                        });
+                });
+
             modelBuilder.Entity("AspMvcAssignment.Models.Person", b =>
                 {
                     b.Property<int>("Id")
@@ -189,15 +253,72 @@ namespace AspMvcAssignment.Migrations
                         });
                 });
 
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.Property<int>("LanguagesLanguageId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PeopleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LanguagesLanguageId", "PeopleId");
+
+                    b.HasIndex("PeopleId");
+
+                    b.ToTable("LanguagePerson");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguagesLanguageId = 1,
+                            PeopleId = 1
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 6,
+                            PeopleId = 1
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 1,
+                            PeopleId = 2
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 3,
+                            PeopleId = 2
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 9,
+                            PeopleId = 3
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 4,
+                            PeopleId = 3
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 8,
+                            PeopleId = 4
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 2,
+                            PeopleId = 4
+                        });
+                });
+
             modelBuilder.Entity("AspMvcAssignment.Models.City", b =>
                 {
-                    b.HasOne("AspMvcAssignment.Models.Country", "country")
+                    b.HasOne("AspMvcAssignment.Models.Country", "Country")
                         .WithMany("Cities")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("country");
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("AspMvcAssignment.Models.Person", b =>
@@ -209,6 +330,21 @@ namespace AspMvcAssignment.Migrations
                         .IsRequired();
 
                     b.Navigation("City");
+                });
+
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.HasOne("AspMvcAssignment.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesLanguageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AspMvcAssignment.Models.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AspMvcAssignment.Models.City", b =>

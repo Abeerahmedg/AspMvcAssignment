@@ -19,6 +19,6 @@ namespace AspMvcAssignment.Models
 
         public City City { get; set; }
 
-        public List<PersonLanguage> PersonLanguages { get; set; }
+        public List<Language> Languages { get; set; } = new List<Language>();   
     }
 }

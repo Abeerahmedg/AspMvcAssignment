@@ -251,55 +251,60 @@ namespace AspMvcAssignment.Migrations
                         });
                 });
 
-            modelBuilder.Entity("AspMvcAssignment.Models.PersonLanguage", b =>
+            modelBuilder.Entity("LanguagePerson", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("LanguagesLanguageId")
                         .HasColumnType("int");
 
-                    b.Property<int>("LanguageId")
+                    b.Property<int>("PeopleId")
                         .HasColumnType("int");
 
-                    b.HasKey("Id", "LanguageId");
+                    b.HasKey("LanguagesLanguageId", "PeopleId");
 
-                    b.HasIndex("LanguageId");
+                    b.HasIndex("PeopleId");
 
-                    b.ToTable("PersonLanguages");
+                    b.ToTable("LanguagePerson");
 
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            LanguageId = 1
+                            LanguagesLanguageId = 1,
+                            PeopleId = 1
                         },
                         new
                         {
-                            Id = 1,
-                            LanguageId = 6
+                            LanguagesLanguageId = 6,
+                            PeopleId = 1
                         },
                         new
                         {
-                            Id = 2,
-                            LanguageId = 1
+                            LanguagesLanguageId = 1,
+                            PeopleId = 2
                         },
                         new
                         {
-                            Id = 2,
-                            LanguageId = 6
+                            LanguagesLanguageId = 3,
+                            PeopleId = 2
                         },
                         new
                         {
-                            Id = 3,
-                            LanguageId = 1
+                            LanguagesLanguageId = 9,
+                            PeopleId = 3
                         },
                         new
                         {
-                            Id = 3,
-                            LanguageId = 9
+                            LanguagesLanguageId = 4,
+                            PeopleId = 3
                         },
                         new
                         {
-                            Id = 4,
-                            LanguageId = 2
+                            LanguagesLanguageId = 8,
+                            PeopleId = 4
+                        },
+                        new
+                        {
+                            LanguagesLanguageId = 2,
+                            PeopleId = 4
                         });
                 });
 
@@ -325,23 +330,19 @@ namespace AspMvcAssignment.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("AspMvcAssignment.Models.PersonLanguage", b =>
+            modelBuilder.Entity("LanguagePerson", b =>
                 {
-                    b.HasOne("AspMvcAssignment.Models.Person", "Person")
-                        .WithMany("PersonLanguages")
-                        .HasForeignKey("Id")
+                    b.HasOne("AspMvcAssignment.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesLanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("AspMvcAssignment.Models.Language", "Language")
-                        .WithMany("PersonLanguages")
-                        .HasForeignKey("LanguageId")
+                    b.HasOne("AspMvcAssignment.Models.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeopleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Language");
-
-                    b.Navigation("Person");
                 });
 
             modelBuilder.Entity("AspMvcAssignment.Models.City", b =>
@@ -352,16 +353,6 @@ namespace AspMvcAssignment.Migrations
             modelBuilder.Entity("AspMvcAssignment.Models.Country", b =>
                 {
                     b.Navigation("Cities");
-                });
-
-            modelBuilder.Entity("AspMvcAssignment.Models.Language", b =>
-                {
-                    b.Navigation("PersonLanguages");
-                });
-
-            modelBuilder.Entity("AspMvcAssignment.Models.Person", b =>
-                {
-                    b.Navigation("PersonLanguages");
                 });
 #pragma warning restore 612, 618
         }

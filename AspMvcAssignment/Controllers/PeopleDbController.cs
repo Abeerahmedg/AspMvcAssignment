@@ -77,21 +77,21 @@ namespace AspMvcAssignment.Controllers
             peopleModel.Search = search;
             return View("Index", peopleModel);
         }
-        [HttpGet]
-        public IActionResult ShowPerson(int personId)
-        {
-            Person person = _context.People.Find(personId);
-            if (person != null)
-            {
-                List<City> cities = _context.Cities.ToList();
-                City city = cities.SingleOrDefault(ci => ci.CityId == person.CityId);
-                ViewData["City"] = city.CityName;
+        //[HttpGet]
+        //public IActionResult ShowPerson(int personId)
+        //{
+        //    Person person = _context.People.Find(personId);
+        //    if (person != null)
+        //    {
+        //        List<City> cities = _context.Cities.ToList();
+        //        City city = cities.SingleOrDefault(ci => ci.CityId == person.CityId);
+        //        ViewData["City"] = city.CityName;
 
-                List<Country> countries = _context.Countries.ToList();
-                ViewData["Country"] = countries.SingleOrDefault(co => co.CountryId == city.CountryId).CountryName;
-            }
-            return PartialView("~/Views/Shared/_PeopleDetailsPartial.cshtml", person);
-        }
+        //        List<Country> countries = _context.Countries.ToList();
+        //        ViewData["Country"] = countries.SingleOrDefault(co => co.CountryId == city.CountryId).CountryName;
+        //    }
+        //    return PartialView("~/Views/Shared/_PeopleDetailsPartial.cshtml", person);
+        //}
 
     }
 }

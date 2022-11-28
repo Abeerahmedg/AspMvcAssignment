@@ -20,40 +20,42 @@ namespace AspMvcAssignment.Data
         public DbSet <City> Cities { get; set; }
         public DbSet <Country> Countries { get; set; }
         public DbSet<Language> Languages { get; set; }
-        public DbSet<PersonLanguage> PersonLanguages { get; set; }
+        //public DbSet<PersonLanguage> PersonLanguages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // primary keys
+
+
+            //primary keys
             modelBuilder.Entity<Person>().HasKey(p => p.Id);
             modelBuilder.Entity<City>().HasKey(c => c.CityId);
             modelBuilder.Entity<Country>().HasKey(co => co.CountryId);
             modelBuilder.Entity<Language>().HasKey(l => l.LanguageId);
-            modelBuilder.Entity<PersonLanguage>().HasKey(pl => new { pl.Id, pl.LanguageId });
+
 
             // relationships
-            modelBuilder.Entity<City>()
-                .HasOne(ci => ci.Country)
-                .WithMany(co => co.Cities)
-                .HasForeignKey(ci => ci.CountryId);
+            //modelBuilder.Entity<City>()
+            //    .HasOne(ci => ci.Country)
+            //    .WithMany(co => co.Cities)
+            //    .HasForeignKey(ci => ci.CountryId);
 
-            modelBuilder.Entity<Person>()
-                .HasOne(p => p.City)
-                .WithMany(ci => ci.People)
-                .HasForeignKey(p => p.CityId);
+            //modelBuilder.Entity<Person>()
+            //    .HasOne(p => p.City)
+            //    .WithMany(ci => ci.People)
+            //    .HasForeignKey(p => p.CityId);
 
-            // relationships (many to many)
-            modelBuilder.Entity<PersonLanguage>()
-                .HasOne(pl => pl.Person)
-                .WithMany(p => p.PersonLanguages)
-                .HasForeignKey(pl => pl.Id);
+            //// relationships (many to many)
+            //modelBuilder.Entity<PersonLanguage>()
+            //    .HasOne(pl => pl.Person)
+            //    .WithMany(p => p.PersonLanguages)
+            //    .HasForeignKey(pl => pl.Id);
 
-            modelBuilder.Entity<PersonLanguage>()
-                .HasOne(pl => pl.Language)
-                .WithMany(l => l.PersonLanguages)
-                .HasForeignKey(pl => pl.LanguageId);
+            //modelBuilder.Entity<PersonLanguage>()
+            //    .HasOne(pl => pl.Language)
+            //    .WithMany(l => l.PersonLanguages)
+            //    .HasForeignKey(pl => pl.LanguageId);
 
 
             modelBuilder.Entity<Country>().HasData(new Country { CountryId = 1, CountryName = "England" });
@@ -85,15 +87,31 @@ namespace AspMvcAssignment.Data
             modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 7, LanguageName = "Hindi" });
             modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 8, LanguageName = "French" });
             modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 9, LanguageName = "Danish" });
+
+
            
 
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {Id = 1, LanguageId = 1 });
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 1, LanguageId = 6 });
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 1 });
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 6 });
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 1 });
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 9 });
-            modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 4, LanguageId = 2 });
+            modelBuilder.Entity<Person>()
+                .HasMany(p => p.Languages)
+                .WithMany(l => l.People)
+                .UsingEntity(j => j.HasData(
+                    new { PeopleId = 1, LanguagesLanguageId = 1 },
+                    new { PeopleId = 1, LanguagesLanguageId = 6 },
+                    new { PeopleId = 2, LanguagesLanguageId = 1 },
+                    new { PeopleId = 2, LanguagesLanguageId = 3 },
+                    new { PeopleId = 3, LanguagesLanguageId = 9 },
+                    new { PeopleId = 3, LanguagesLanguageId = 4 },
+                    new { PeopleId = 4, LanguagesLanguageId = 8 },
+                    new { PeopleId = 4, LanguagesLanguageId = 2 }
+                    ));
+
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {Id = 1, LanguageId = 1 });
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 1, LanguageId = 6 });
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 1 });
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 6 });
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 1 });
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 9 });
+            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 4, LanguageId = 2 });
 
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

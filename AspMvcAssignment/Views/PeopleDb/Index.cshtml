@@ -27,6 +27,9 @@
                         </select>
                         <span asp-validation-for="cpvm.CityId"></span>
                     </div>
+                    <div>
+                        <input type="submit" value="Add" class="btn btn-primary">
+                    </div>
 
                 </div>
             </div>
@@ -51,7 +54,7 @@
                     <th>Name</th>
                     <th>Number of books</th>
                     <th>City</th>
-                    <th>Languages </th>
+                    <th> </th>
                     <th> </th>
                 </tr>
             </thead>
@@ -63,8 +66,8 @@
                         <td>@person.Name</td>
                         <td>@person.NumberOfBooks</td>
                         <td>@person.City.CityName</td>
-                        <td>@person.PersonLanguages</td>
                         <td><a asp-action="Delete" asp-route-id=@person.Id class="btn btn-danger">Delete</a></td>
+                        <td><a asp-controller="PersonLanguage" asp-action="Index" class="btn btn-primary" asp-route-id=@person.Id>Spoken Languge</a></td>
                         @*<td><a asp-action="ShowPerson" asp-route-id=@person.Id class="btn btn-primary">Details</a></td>*@
                     </tr>
                 }

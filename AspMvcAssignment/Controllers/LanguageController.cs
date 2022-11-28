@@ -2,6 +2,8 @@
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace AspMvcAssignment.Controllers
 {
@@ -17,7 +19,13 @@ namespace AspMvcAssignment.Controllers
 
         public IActionResult Index()
         {
-            languageView.Languages = _context.Languages.ToList();
+            ViewBag.LanguagNames = new SelectList(_context.Languages, "LanguageId", "LanguageName");
+            languageView.Languages = _context.Languages.Include(x=>x.Languages).ToList();
+            return View(languageView);
+        }
+
+        public IActionResult Create()
+        {
             return View();
         }
 
@@ -41,26 +49,16 @@ namespace AspMvcAssignment.Controllers
         }
 
         [HttpGet]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int LanguageId)
         {
-            var deleteLanguage = _context.Languages.FirstOrDefault(l => l.LanguageId == id);
-            if (deleteLanguage == null)
+            var deleteLanguage = _context.Languages.Find(LanguageId);
+            if (deleteLanguage != null)
             {
-                ViewData["Message"] = "Failed to delete language!";
-                return View(_context.Languages.ToList());
+               _context.Languages.Remove(deleteLanguage);
+                _context.SaveChanges();
             }
 
-            try
-            {
-                _context.Languages.Remove(deleteLanguage);
-                _context.SaveChanges();
-                return RedirectToAction(nameof(Index), "Person");
-            }
-            catch
-            {
-                ViewData["Message"] = $"Failed to delete {deleteLanguage.LanguageName}!";
-            }
-            return View(_context.Languages.ToList());
+            return View("Index");
         }
     }
 

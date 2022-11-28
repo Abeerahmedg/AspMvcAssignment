@@ -11,6 +11,7 @@ namespace AspMvcAssignment.Models
         [Required]
         public string LanguageName { get; set; }
 
-        public List<PersonLanguage> PersonLanguages { get; set; }
+        public List<Person> People { get; set; } = new List<Person>();
+        public List<Language> Languages { get; set; } = new List<Language>();
     }
 }
