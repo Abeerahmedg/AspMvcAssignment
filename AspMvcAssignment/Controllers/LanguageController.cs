@@ -1,12 +1,14 @@
 ﻿using AspMvcAssignment.Data;
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspMvcAssignment.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LanguageController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -53,9 +55,9 @@ namespace AspMvcAssignment.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
-        public IActionResult Delete(int LanguageId , int id)
+        public IActionResult Delete(int LanguageId, int id)
         {
-            var person = _context.People.Include(x=>x.Languages).FirstOrDefault(x => x.Id == id);
+            var person = _context.People.Include(x => x.Languages).FirstOrDefault(x => x.Id == id);
             var deleteLanguage = _context.Languages.Find(LanguageId);
             if (deleteLanguage != null)
             {
@@ -63,12 +65,12 @@ namespace AspMvcAssignment.Controllers
                 _context.SaveChanges();
             }
 
-            return View("Index", new {id = id});
+            return View("Index", new { id = id });
         }
         [HttpPost]
         public IActionResult Details(int id)
         {
-           
+
             return View("Index");
         }
 

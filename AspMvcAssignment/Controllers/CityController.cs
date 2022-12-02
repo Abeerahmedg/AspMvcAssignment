@@ -1,14 +1,18 @@
 ﻿using AspMvcAssignment.Data;
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace AspMvcAssignment.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
+
         readonly ApplicationDbContext _context;
         public CityViewModel cityView = new CityViewModel();
         public CityController(ApplicationDbContext context)
@@ -19,7 +23,7 @@ namespace AspMvcAssignment.Controllers
         public IActionResult Index()
         {
             ViewBag.CountryNames = new SelectList(_context.Countries, "CountryId", "CountryName");
-            cityView.Cities = _context.Cities.Include(x=> x.Country).ToList();
+            cityView.Cities = _context.Cities.Include(x => x.Country).ToList();
             return View(cityView);
         }
 
@@ -52,9 +56,9 @@ namespace AspMvcAssignment.Controllers
         }
 
 
-            public IActionResult Delete(int cityId)
+        public IActionResult Delete(int cityId)
         {
-           
+
             City city = _context.Cities.Find(cityId);
 
 
@@ -91,9 +95,10 @@ namespace AspMvcAssignment.Controllers
                 city.CityName = cityViewModel.CityName;
                 city.CountryId = cityViewModel.CountryId;
                 _context.SaveChanges();
+                return RedirectToAction("Index");
             }
+            return View(cityViewModel);
 
-            return RedirectToAction("Index");
         }
 
         //public IActionResult Edit (string id)

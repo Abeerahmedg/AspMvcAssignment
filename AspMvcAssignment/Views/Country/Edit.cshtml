@@ -1,11 +1,12 @@
 ﻿@model CountryViewModel
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Country";
 }
 
 <form asp-action="Edit" method="post">
-    <input type="text" name="CountryName" placeholder="Name" value="@Model.CountryName">
-    <input type="hidden" name="CountryId" value="@Model.CountryId">
+    <label asp-for="CountryName"></label>
+    <input asp-for="CountryName" />
+    <input type="hidden" asp-for="CountryId" value="@Model.CountryId">
     <input type="submit" value="Add" class="btn btn-primary">
 </form>

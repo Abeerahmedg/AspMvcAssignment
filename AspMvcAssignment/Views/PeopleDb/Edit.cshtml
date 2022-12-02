@@ -6,9 +6,14 @@
 
 
 <form asp-action="Edit" method="post">
-    <input type="text" name="Name" placeholder="Name" value="@Model.Name">
-    <input type="text" name="NumberOfBooks" placeholder="NumberOfBooks" value="@Model.NumberOfBooks">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+   <label asp-for="NumberOfBooks"></label>
+   <input asp-for="NumberOfBooks" />
+   <span asp-validation-for="NumberOfBooks"></span>
     <select asp-for="CityId" id="selectlist" name="CityId" asp-items="@ViewBag.Cities"></select>
-    <input type="hidden" name="Id" value="@Model.NumberOfBooks">
+    <span asp-validation-for="CityId"></span>
     <input type="submit" value="Add" class="btn btn-primary">
+
 </form>

@@ -66,3 +66,29 @@
 
 *@
 <h1>Welcom to this site</h1>
+@if (!User.Identity.IsAuthenticated)
+{
+    <h3>Please login or register ! </h3>
+
+}
+ @if (User.Identity.IsAuthenticated)
+ {
+     @if(User.IsInRole("Admin"))
+     {
+     <p>Hello Admin !</p>
+     }
+     else if(User.IsInRole("User"))
+     {
+         <p>Hello User!</p>
+     }
+    else if (User.IsInRole("Moderator"))
+    {
+        <p>Hello Moderator!</p>
+    }
+    else
+    {
+        <p>Hello Visitor!</p>
+    }
+
+ 
+ }

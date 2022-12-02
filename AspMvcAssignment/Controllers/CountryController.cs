@@ -1,12 +1,14 @@
 ﻿using AspMvcAssignment.Data;
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspMvcAssignment.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         readonly ApplicationDbContext _context;
@@ -79,7 +81,7 @@ namespace AspMvcAssignment.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditCountry(CountryViewModel countryViewModel)
+        public IActionResult Edit(CountryViewModel countryViewModel)
         {
             Country country = _context.Countries.Find(countryViewModel.CountryId);
 
@@ -87,9 +89,10 @@ namespace AspMvcAssignment.Controllers
             {
                 country.CountryName = countryViewModel.CountryName;
                 _context.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            return View(countryViewModel);
         }
     }
 }

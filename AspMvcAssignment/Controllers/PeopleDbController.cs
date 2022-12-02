@@ -1,12 +1,15 @@
 ﻿using AspMvcAssignment.Data;
 using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 
 namespace AspMvcAssignment.Controllers
 {
+    [Authorize]
     public class PeopleDbController : Controller
     {
         readonly ApplicationDbContext _context;
@@ -18,10 +21,10 @@ namespace AspMvcAssignment.Controllers
         }
 
         public IActionResult Index()
-        { 
+        {
             peopleModel.PeopleList = _context.People.Include(x => x.City.Country).ToList();
             ViewBag.Cities = new SelectList(_context.Cities, "CityId", "CityName");
-           
+
             return View(peopleModel);
         }
         public IActionResult Create()
@@ -46,7 +49,7 @@ namespace AspMvcAssignment.Controllers
             else
             {
                 peopleModel.PeopleList = _context.People.ToList();
-                return View("Index", peopleModel);
+                return View(peopleModel);
             }
             //return RedirectToAction("Index");
         }
@@ -55,7 +58,7 @@ namespace AspMvcAssignment.Controllers
             int prsonId = int.Parse(id);
             Person person = _context.People.Find(prsonId);
 
-           
+
             if (person != null)
             {
                 _context.People.Remove(person);
@@ -121,9 +124,9 @@ namespace AspMvcAssignment.Controllers
                 person.NumberOfBooks = personViewModel.NumberOfBooks;
                 person.CityId = personViewModel.CityId;
                 _context.SaveChanges();
-            }
-
             return RedirectToAction("Index");
+            }
+            return View(personViewModel);
         }
 
     }
