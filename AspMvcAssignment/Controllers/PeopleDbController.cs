@@ -18,9 +18,10 @@ namespace AspMvcAssignment.Controllers
         }
 
         public IActionResult Index()
-        {
-            ViewBag.CityNames = new SelectList(_context.Cities, "CityId", "CityName");
-            peopleModel.PeopleList = _context.People.Include(x => x.City).ToList();
+        { 
+            peopleModel.PeopleList = _context.People.Include(x => x.City.Country).ToList();
+            ViewBag.Cities = new SelectList(_context.Cities, "CityId", "CityName");
+           
             return View(peopleModel);
         }
         public IActionResult Create()
@@ -28,15 +29,16 @@ namespace AspMvcAssignment.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Create(PeopleViewModel m)
+        public IActionResult Create(CreatePersonViewModel cpvm)
         {
-            CreatePersonViewModel cpvm = new CreatePersonViewModel();
+            // CreatePersonViewModel cpvm = new CreatePersonViewModel();
+            Person person = new Person();
             ModelState.Remove("CityName");
             ModelState.Remove("Id");
             if (ModelState.IsValid)
             {
-                var addPerson = new Person() { Name = m.cpvm.Name, NumberOfBooks = m.cpvm.NumberOfBooks, CityId = m.cpvm.CityId };
-                _context.People.Add(addPerson);
+                person = new Person() { Name = cpvm.Name, NumberOfBooks = cpvm.NumberOfBooks, CityId = cpvm.CityId };
+                _context.People.Add(person);
                 _context.SaveChanges();
                 return RedirectToAction("Index");
 
@@ -92,6 +94,37 @@ namespace AspMvcAssignment.Controllers
         //    }
         //    return PartialView("~/Views/Shared/_PeopleDetailsPartial.cshtml", person);
         //}
+
+        public IActionResult Edit(int id)
+        {
+            Person person = _context.People.Find(id);
+            PersonViewModel personViewModel = new PersonViewModel();
+
+            personViewModel.Id = id;
+            personViewModel.Name = person.Name;
+            personViewModel.NumberOfBooks = person.NumberOfBooks;
+            personViewModel.CityId = person.CityId;
+
+            ViewBag.Cities = new SelectList(_context.Cities, "CityId", "CityName");
+
+            return View(personViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(PersonViewModel personViewModel)
+        {
+            Person person = _context.People.Find(personViewModel.Id);
+
+            if (ModelState.IsValid)
+            {
+                person.Name = personViewModel.Name;
+                person.NumberOfBooks = personViewModel.NumberOfBooks;
+                person.CityId = personViewModel.CityId;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
 
     }
 }

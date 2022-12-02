@@ -5,6 +5,17 @@
 
 <p>City: @ViewBag.City (@ViewBag.Country)</p>
 
+<td>
+    <ul>
+        @foreach (var language in Model.Languages)
+        {
+            <li>
+                @language.LanguageName
+            </li>
+
+        }
+    </ul>
+</td>
 <div class="col-4">
     <b class="col"> <a asp-action="Delete" asp-controller="Home" asp-route-id=@Model.Id class="btn btn-danger">Delete</a></b>
 </div>

@@ -66,5 +66,30 @@ namespace AspMvcAssignment.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult Edit(int id)
+        {
+            Country country = _context.Countries.Find(id);
+            CountryViewModel countryViewModel = new CountryViewModel();
+
+            countryViewModel.CountryId = id;
+            countryViewModel.CountryName = country.CountryName;
+
+            return View(countryViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EditCountry(CountryViewModel countryViewModel)
+        {
+            Country country = _context.Countries.Find(countryViewModel.CountryId);
+
+            if (ModelState.IsValid)
+            {
+                country.CountryName = countryViewModel.CountryName;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }

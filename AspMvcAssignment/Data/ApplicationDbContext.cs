@@ -1,10 +1,13 @@
 ﻿using AspMvcAssignment.Models;
 using AspMvcAssignment.ViewModels;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace AspMvcAssignment.Data
 {
-    public class ApplicationDbContext :DbContext
+    public class ApplicationDbContext :IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
         {
@@ -105,14 +108,36 @@ namespace AspMvcAssignment.Data
                     new { PeopleId = 4, LanguagesLanguageId = 2 }
                     ));
 
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage {Id = 1, LanguageId = 1 });
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 1, LanguageId = 6 });
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 1 });
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 2, LanguageId = 6 });
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 1 });
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 3, LanguageId = 9 });
-            //modelBuilder.Entity<PersonLanguage>().HasData(new PersonLanguage { Id = 4, LanguageId = 2 });
+            // seeding (user roles and standard account)
+            string adminRoleId = Guid.NewGuid().ToString();
+            string moderatorRoleId = Guid.NewGuid().ToString();
+            string userId = Guid.NewGuid().ToString();
 
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = adminRoleId, Name = "Admin", NormalizedName = "ADMIN" });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = moderatorRoleId, Name = "Moderator", NormalizedName = "MODERATOR" });
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole { Id = userId, Name = "User", NormalizedName = "USER" });
+
+            PasswordHasher<ApplicationUser> hasher = new PasswordHasher<ApplicationUser>();
+
+            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = userId,
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                UserName = "admin@admin.com",
+                NormalizedUserName = "ADMIN@ADMIN.COM",
+                FirstName = "Admin",
+                LastName = "Adminsson",
+                Birthdate = "1995-03-22",
+                PasswordHash = hasher.HashPassword(null, "password")
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = adminRoleId,
+                UserId = userId
+            });
         }
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{

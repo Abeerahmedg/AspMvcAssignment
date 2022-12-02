@@ -1,24 +1,22 @@
-//using System.Reflection;
-//using AspMvcAssignment.Models;
-//using AspMvcAssignment.ViewModels;
-//using Microsoft.AspNetCore.Mvc;
-//using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using AspMvcAssignment.Models;
+using AspMvcAssignment.ViewModels;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
-//namespace AspMvcAssignment.Controllers
-//{
-//    public class HomeController : Controller
-//    {
-//       static PeopleViewModel pvm = new PeopleViewModel();
-//        public IActionResult Index()
-//        {
-//            if (pvm.PeopleList.Count == 0)
-//            {
-//                pvm.FillPeople();
-//            }
-          
+namespace AspMvcAssignment.Controllers
+{
+    public class HomeController : Controller
+    {
 
-//            return View(pvm);
-//        }
+        public IActionResult Index()
+        {
+
+
+            return View();
+        }
+    }
+}
 
 //        public IActionResult Delete(int id)
 //        {
@@ -52,7 +50,7 @@
 //            return RedirectToAction("Index");
 //        }
 
-      
+
 //        [HttpPost]
 //        public IActionResult Search(string search)
 //        {
@@ -63,7 +61,7 @@
 //            {
 //                return RedirectToAction("Index");
 //            }
-           
+
 //            pvm.PeopleList = pvm.PeopleList.Where(x => x.Name.Contains(search)).ToList();
 //            pvm.Search = search;
 //            return View("Index", pvm);

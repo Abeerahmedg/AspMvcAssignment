@@ -46,6 +46,9 @@
                 <td>@city.CityName</td>
                 <td>@city.Country.CountryName</td>
                 <td><a asp-action="Delete" asp-route-cityId=@city.CityId class="btn btn-danger">Delete</a></td>
+                <td>
+                    <a asp-action="Edit" asp-controller="City" asp-route-id=@city.CityId class="btn btn-primary">Edit</a>
+                </td>
             </tr>
             
         }
