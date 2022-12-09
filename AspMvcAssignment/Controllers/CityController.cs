@@ -29,6 +29,7 @@ namespace AspMvcAssignment.Controllers
 
         public IActionResult Create()
         {
+           
             return View();
         }
         [HttpPost]
@@ -37,20 +38,21 @@ namespace AspMvcAssignment.Controllers
 
 
             City city = new City();
-            ModelState.Remove("Country");
+            //ModelState.Remove("CountryName");
+            ModelState.Remove("Countries");
             ModelState.Remove("CityId");
             if (ModelState.IsValid)
             {
                 city = new City() { CityName = cvm.CityName, CountryId = cvm.CountryId };
                 _context.Cities.Add(city);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("index");
 
             }
             else
             {
                 cvm.Cities = _context.Cities.ToList();
-                return View("Index", cvm);
+                return View(cvm);
             }
             //return RedirectToAction("Index");
         }
@@ -89,7 +91,7 @@ namespace AspMvcAssignment.Controllers
         public IActionResult Edit(CityViewModel cityViewModel)
         {
             City city = _context.Cities.Find(cityViewModel.CityId);
-
+            ModelState.Remove("Countries");
             if (ModelState.IsValid)
             {
                 city.CityName = cityViewModel.CityName;
@@ -97,7 +99,7 @@ namespace AspMvcAssignment.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cityViewModel);
+            return View("Index");
 
         }
 
