@@ -80,6 +80,7 @@ namespace AspMvcAssignment.Data
             modelBuilder.Entity<Person>().HasData(new Person { Id= 2, Name="Dan Brown", NumberOfBooks=7, CityId =2 });
             modelBuilder.Entity<Person>().HasData(new Person {Id = 3, Name="Yasuo Uchida", NumberOfBooks=130, CityId=7 });
             modelBuilder.Entity<Person>().HasData(new Person {Id=4, Name="Ahmed Tawfik", NumberOfBooks=200, CityId = 6 });
+            modelBuilder.Entity<Person>().HasData(new Person { Id =5 , Name = "Ahmed fdssa", NumberOfBooks = 2, CityId = 7 });
 
             modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 1, LanguageName = "English" });
             modelBuilder.Entity<Language>().HasData(new Language { LanguageId = 2, LanguageName = "Arabic" });

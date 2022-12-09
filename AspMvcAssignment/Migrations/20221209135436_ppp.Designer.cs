@@ -4,6 +4,7 @@ using AspMvcAssignment.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AspMvcAssignment.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221209135436_ppp")]
+    partial class ppp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -104,11 +106,11 @@ namespace AspMvcAssignment.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bb810b91-d18a-450f-9bde-2ca75589f0dc",
+                            Id = "d2a97bd1-6499-4e94-975b-468565e04fd0",
                             AccessFailedCount = 0,
                             Admin = false,
                             Birthdate = "1995-03-22",
-                            ConcurrencyStamp = "ee82d70a-5d64-421a-b69a-3471aaee3d17",
+                            ConcurrencyStamp = "d5de51e9-b5c9-41e4-ab0f-81927144a632",
                             Email = "admin@admin.com",
                             EmailConfirmed = false,
                             FirstName = "Admin",
@@ -116,9 +118,9 @@ namespace AspMvcAssignment.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAENR2ENjE9apceEDnYqdoXZ5cK3R1LEyLF9F2R40OdiKf6jlDEieZ3JaKur1237ZiLg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELYBAYfVTDpHsM01GkwYWOVMG1CDc/X5jCCmyWUFrXSi90smve8/OKeJO650lHk5mg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f128b686-c9bd-4208-a95f-aa837fd46b0e",
+                            SecurityStamp = "43f5e3ff-b25a-4cb2-921a-68f2c2d1bcf7",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
                         });
@@ -351,13 +353,6 @@ namespace AspMvcAssignment.Migrations
                             CityId = 6,
                             Name = "Ahmed Tawfik",
                             NumberOfBooks = 200
-                        },
-                        new
-                        {
-                            Id = 5,
-                            CityId = 7,
-                            Name = "Ahmed fdssa",
-                            NumberOfBooks = 2
                         });
                 });
 
@@ -447,22 +442,22 @@ namespace AspMvcAssignment.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "25b3a9a9-3706-4b05-acd8-3bdf4ed53f47",
-                            ConcurrencyStamp = "8f2b5dc0-0d3c-4bb8-9464-264358548aed",
+                            Id = "cbd06b0e-a760-43d9-af52-2c30a4e96bb2",
+                            ConcurrencyStamp = "4579c501-aeb4-4eca-80d2-e04c6d0a5c3d",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "454b1cd2-455d-472c-8556-0b5d2cb038b0",
-                            ConcurrencyStamp = "fb99f93f-02c8-4a94-bfe7-3788e63aa906",
+                            Id = "ae775664-33af-44cc-8ad0-94fd4a37c733",
+                            ConcurrencyStamp = "61581ea1-435f-47f0-985d-4949dff39c82",
                             Name = "Moderator",
                             NormalizedName = "MODERATOR"
                         },
                         new
                         {
-                            Id = "bb810b91-d18a-450f-9bde-2ca75589f0dc",
-                            ConcurrencyStamp = "38c172df-c434-4104-9e5f-9d4890909a11",
+                            Id = "d2a97bd1-6499-4e94-975b-468565e04fd0",
+                            ConcurrencyStamp = "c0635b1e-cfb4-4d69-b4c6-6870196a4dcd",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -559,8 +554,8 @@ namespace AspMvcAssignment.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "bb810b91-d18a-450f-9bde-2ca75589f0dc",
-                            RoleId = "25b3a9a9-3706-4b05-acd8-3bdf4ed53f47"
+                            UserId = "d2a97bd1-6499-4e94-975b-468565e04fd0",
+                            RoleId = "cbd06b0e-a760-43d9-af52-2c30a4e96bb2"
                         });
                 });
 
