@@ -1,13 +1,15 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AspMvcAssignment.Models
 {
     public class Person
     {
         [Key]
+       // [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Please enter writer name.")]
+        [Required]
         public string Name { get; set; }
 
         [Required]
