@@ -2,7 +2,7 @@
 {
     public class ReactPerson
     {
-        public int Íd { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public int NumberOfBooks { get; set; }
         public int CityId { get; set; }

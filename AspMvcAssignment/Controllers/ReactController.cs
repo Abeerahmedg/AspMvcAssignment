@@ -95,7 +95,6 @@ namespace AspMvcAssignment.Controllers
         public List<Person> GetPeople()
         {
             List<Person> people = new List<Person>();
-            //people = _context.People.Include(p => p.City).ToList();
             people = _context.People.ToList();
             return people;
         }
@@ -106,7 +105,8 @@ namespace AspMvcAssignment.Controllers
             Person person = await _context.People.Include(p => p.City).Include(l => l.Languages).FirstOrDefaultAsync(x => x.Id == id);
             City cityFromId = await _context.Cities.FirstOrDefaultAsync(c => c.CityId == person.CityId);
 
-            List<string> languages = new();
+            List<string> languages = new List<string>();
+
             foreach (var language in person.Languages)
             {
                 languages.Add(language.LanguageName);
@@ -119,6 +119,7 @@ namespace AspMvcAssignment.Controllers
                 reactPerson.City = cityFromId.CityName;
                 reactPerson.Country = _context.Countries.FirstOrDefault(x => x.CountryId == cityFromId.CountryId).CountryName;
                 reactPerson.CountryId = cityFromId.CountryId;
+                reactPerson.Languages = languages;
             }
 
             reactPerson.Languages = languages;
@@ -145,7 +146,7 @@ namespace AspMvcAssignment.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(string id)
+        public IActionResult Delete(int id)
         {
             var person = _context.People.Find(id);
 
@@ -168,6 +169,7 @@ namespace AspMvcAssignment.Controllers
 
             if (personToCreate != null)
             {
+                
                 _context.People.Add(personToCreate);
                 _context.SaveChanges();
 
@@ -176,5 +178,44 @@ namespace AspMvcAssignment.Controllers
 
             return StatusCode(404);
         }
+        //[HttpGet("{id}")]
+        //public async Task<ReactPerson> GetPersonDetails(int id)
+        //{
+        //    Person person = await _context.People.Include(p => p.City).Include(l => l.Languages).FirstOrDefaultAsync(x => x.Id == id);
+        //    City cityFromId = await _context.Cities.FirstOrDefaultAsync(c => c.CityId == person.CityId) ?? new City();
+
+        //    List<string> languages = new List<string>();
+
+        //    foreach (var language in person.Languages)
+        //    {
+        //        languages.Add(language.LanguageName);
+        //    }
+
+        //    if (cityFromId == null)
+        //    {
+        //        return new ReactPerson
+        //        {
+        //            Id = 0,
+        //            Name = "City not found",
+        //            NumberOfBooks = 0,
+        //            City = "",
+        //            Country = "",
+        //            Languages = null
+        //        };
+        //    }
+        //    else
+        //    {
+        //        return new ReactPerson
+        //        {
+        //            Id = person.Id,
+        //            Name = person.Name,
+        //            NumberOfBooks = person.NumberOfBooks,
+        //            City = cityFromId.CityName,
+        //            Country = cityFromId.Country.CountryName,
+        //            Languages = languages
+        //        };
+        //    }
+        //}
     }
 }
+
